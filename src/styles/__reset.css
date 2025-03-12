@@ -60,3 +60,26 @@ h6 {
 #__next {
     isolation: isolate;
 }
+
+/***************/
+/*             */
+/*   MY CODE   */
+/*             */
+/***************/
+button {
+    all: unset;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    color: inherit;
+    background: transparent;
+    border: none;
+}

@@ -1,0 +1,8 @@
+$dark-text-main: white;
+$dark-bg-main: #242424;
+
+@mixin flexCenter() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
