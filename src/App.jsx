@@ -11,7 +11,7 @@ function App() {
             <Nav setIsGuideOpen={setIsGuideOpen} />
             <main></main>
             <Footer />
-            <Guidance isOpen={isGuideOpen} />
+            <Guidance isOpen={isGuideOpen} setIsGuideOpen={setIsGuideOpen} />
         </>
     );
 }

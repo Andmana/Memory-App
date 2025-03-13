@@ -4,7 +4,7 @@ import "../styles/nav.scss";
 import mainMusic from "../assets/musics/Ending.mp3";
 
 const Nav = ({ setIsGuideOpen }) => {
-    const [isPlay, setPlayState] = useState(true);
+    const [isPlay, setPlayState] = useState(false);
     const soundRef = useRef(null);
 
     useEffect(() => {
