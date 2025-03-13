@@ -17,6 +17,10 @@ function App() {
     const soundRef = useRef(null);
     const [isFirstLoad, setFirstLoad] = useState(true);
 
+    const handleSetState = (val) => {
+        setState(val);
+    };
+
     useEffect(() => {
         soundRef.current = new Howl({
             src: [mainBgm],
@@ -65,7 +69,11 @@ function App() {
                         setIsMusicPlaying={setIsMusicPlaying}
                         isMusicPlaying={isMusicPlaying}
                     />
-                    {state === 0 && <Intro />}
+                    <main>
+                        {state === 0 && (
+                            <Intro handleSetState={handleSetState} />
+                        )}
+                    </main>
                     <Footer />
                     <Guidance
                         isOpen={isGuideOpen}

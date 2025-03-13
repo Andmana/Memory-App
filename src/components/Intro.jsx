@@ -1,17 +1,19 @@
 import pokemonImg from "/pokemon.png";
 import memoryImg from "/memory-card.png";
 import "../styles/intro.scss";
-const Intro = () => {
+const Intro = ({ handleSetState }) => {
     return (
-        <main>
+        <>
             <header>
                 <img src={pokemonImg} alt="" />
             </header>
             <section>
                 <img src={memoryImg} alt="" />
-                <h1>START</h1>
+                <button className="btn" onClick={() => handleSetState(1)}>
+                    <h1>START</h1>
+                </button>
             </section>
-        </main>
+        </>
     );
 };
 
