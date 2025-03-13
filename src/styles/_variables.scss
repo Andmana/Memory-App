@@ -1,8 +1,20 @@
 $dark-text-main: white;
 $dark-bg-main: #242424;
 
+$color-theme: #f833c1;
+$color-theme-transparent: #0b1548a4;
+$color-theme-2: #0b1548;
+
+$outline: -1px -1px 0px $color-theme-2, 1px -1px 0px $color-theme-2,
+    -1px 1px 0px $color-theme-2, 1px 1px 0px $color-theme-2;
+
 @mixin flexCenter() {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@mixin textHead {
+    font-size: 2rem;
+    font-weight: 800;
 }

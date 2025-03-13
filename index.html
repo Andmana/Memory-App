@@ -15,15 +15,40 @@
                 </div>
             </nav>
             <main>
-                <header></header>
-                <section></section>
+                <header>
+                    <div><button class="btn">BACK</button></div>
+                    <div>
+                        <div class="game-mode">Difficulty</div>
+                        <div class="game-mode__value">Trainer</div>
+                        <div class="game-score">0/1</div>
+                    </div>
+                    <div class="mascot">Pikachu</div>
+                </header>
+                <section>
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="/pikachu.png" alt="" />
+                            </div>
+                            <div class="card-text">PIKACHU</div>
+                        </div>
+                    </div>
+                </section>
             </main>
             <footer>
                 <div class="footer">
-                    <a href="">Repo</a>
+                    <a href="">REPO</a>
                 </div>
             </footer>
         </div>
         <script type="module" src="/src/main.jsx"></script>
+        <script>
+            const card = document.querySelector(".card");
+            const cards = document.querySelector(".cards-container");
+
+            for (let i = 0; i < 9; i++) {
+                cards.appendChild(card.cloneNode(true));
+            }
+        </script>
     </body>
 </html>

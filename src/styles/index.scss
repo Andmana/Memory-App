@@ -1,6 +1,48 @@
+@use "variables" as *;
+
 @font-face {
-    font-family: "Walter";
-    src: url("../assets/fonts/WalterTurncoat-Regular.ttf") format("truetype");
+    font-family: "JotiOne";
+    src: url("../assets/fonts/JotiOne-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    text-align: center;
+    font-size: 1.5em;
+    font-family: "JotiOne", sans-serif;
+    -webkit-text-stroke: 4px $color-theme;
+    paint-order: stroke fill;
+    color: $color-theme-2;
+    background: $dark-bg-main url("/main-bg2.jpg") no-repeat center/cover;
+}
+
+a {
+    -webkit-text-stroke: 4px $color-theme;
+    paint-order: stroke fill;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 1rem;
+}
+
+.icon-music {
+    background-image: url("/icon-music-on.svg");
+}
+.icon-help {
+    background-image: url("/icon-help.svg");
+}
+
+.btn {
+    @include textHead;
 }
