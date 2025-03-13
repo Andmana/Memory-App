@@ -4,4 +4,14 @@ nav {
     @include flexCenter;
     justify-content: start;
     padding: 0.6rem 15%;
+    animation: float-down 0.4s ease-out forwards;
+}
+
+@keyframes float-down {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

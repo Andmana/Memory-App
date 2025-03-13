@@ -1,0 +1,56 @@
+@use "variables" as *;
+
+main {
+    flex: 1;
+    padding: 0.6rem;
+    animation: zoom-in 0.4s ease-out forwards;
+}
+
+header {
+    @include flexCenter;
+
+    img {
+        height: 200px;
+    }
+}
+
+section {
+    @include flexCenter;
+    flex-direction: column;
+    color: white;
+
+    img {
+        height: 200px;
+        transform: translateY(-20%) translateX(10%);
+    }
+
+    h1 {
+        animation: gelatine 0.5s infinite 0.4s;
+    }
+}
+
+@keyframes zoom-in {
+    0% {
+        transform: scale(0.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes gelatine {
+    from,
+    to {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+}
