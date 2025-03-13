@@ -1,7 +1,19 @@
+import { useState } from "react";
 import "./styles/app.scss";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import Guidance from "./components/Guidance";
 
 function App() {
-    return <></>;
+    const [isGuideOpen, setIsGuideOpen] = useState(false);
+    return (
+        <>
+            <Nav setIsGuideOpen={setIsGuideOpen} />
+            <main></main>
+            <Footer />
+            <Guidance isOpen={isGuideOpen} />
+        </>
+    );
 }
 
 export default App;

@@ -13,6 +13,10 @@
     flex-direction: column;
 }
 
+#root {
+    position: relative;
+}
+
 body {
     text-align: center;
     font-size: 1.5em;
@@ -44,6 +48,10 @@ a {
 }
 .icon-help {
     background-image: url("/icon-help.svg");
+}
+
+.icon-close {
+    background-image: url("/icon-close.svg");
 }
 
 .btn {

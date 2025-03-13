@@ -1,18 +1,19 @@
 import { useEffect, useState, useRef } from "react";
 import { Howl } from "howler";
-import soundMain from "../assets/musics/Ending.mp3";
 import "../styles/nav.scss";
+import mainMusic from "../assets/musics/Ending.mp3";
 
-const Nav = () => {
-    const [isPlay, setPlayState] = useState(false);
-    const soundRef = useRef(null); // Store the Howl instance
+const Nav = ({ setIsGuideOpen }) => {
+    const [isPlay, setPlayState] = useState(true);
+    const soundRef = useRef(null);
 
     useEffect(() => {
         if (soundRef.current === null) {
             soundRef.current = new Howl({
-                src: [soundMain],
+                src: [mainMusic],
                 html5: true,
                 loop: true,
+                volume: 1,
             });
         }
 
@@ -38,7 +39,10 @@ const Nav = () => {
                     className={`icon icon-music${isPlay ? "__on" : "__off"}`}
                     onClick={toggleMusic}
                 ></button>
-                <button className="icon icon-help"></button>
+                <button
+                    className="icon icon-help"
+                    onClick={() => setIsGuideOpen((prevState) => !prevState)}
+                ></button>
             </div>
         </nav>
     );
