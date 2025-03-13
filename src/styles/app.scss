@@ -7,22 +7,3 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
-
-.card {
-    @include flexCenter;
-    justify-content: space-between;
-    background-color: $color-theme-transparent;
-    border: 3px solid $color-theme;
-    border-radius: 10px;
-    flex-direction: column;
-    width: 120px;
-    height: 150px;
-}
-.card-image {
-    margin: 1.2rem;
-}
-
-.card-text {
-    padding: 0 5px;
-    font-size: 1.2rem;
-}
