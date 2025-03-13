@@ -4,13 +4,13 @@ import "../styles/intro.scss";
 const Intro = ({ handleSetState }) => {
     return (
         <>
-            <header>
+            <header className="intro-header">
                 <img src={pokemonImg} alt="" />
             </header>
-            <section>
+            <section className="intro-section">
                 <img src={memoryImg} alt="" />
-                <button className="btn" onClick={() => handleSetState(1)}>
-                    <h1>START</h1>
+                <button className="gelatine" onClick={() => handleSetState(1)}>
+                    START
                 </button>
             </section>
         </>

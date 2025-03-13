@@ -6,7 +6,7 @@ main {
     animation: zoom-in 0.4s ease-out forwards;
 }
 
-header {
+.intro-header {
     @include flexCenter;
 
     img {
@@ -14,7 +14,7 @@ header {
     }
 }
 
-section {
+.intro-section {
     @include flexCenter;
     flex-direction: column;
     color: white;
@@ -24,8 +24,9 @@ section {
         transform: translateY(-20%) translateX(10%);
     }
 
-    h1 {
+    .gelatine {
         animation: gelatine 0.7s infinite 0.4s;
+        font-size: 2rem;
     }
 }
 

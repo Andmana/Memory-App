@@ -1,0 +1,68 @@
+@use "variables" as *;
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.difficulty-header {
+    @include flexCenter;
+
+    img:nth-of-type(1) {
+        height: 200px;
+        animation: img-move-1 0.4s ease-out forwards;
+    }
+
+    img:nth-of-type(2) {
+        height: 150px;
+        animation: img-move-2 0.4s ease-out forwards;
+    }
+}
+
+.difficulty-section {
+    flex: 1;
+    @include flexCenter;
+    flex-direction: column;
+    gap: 2rem;
+
+    .difficulty-buttons {
+        @include flexCenter();
+        gap: 2rem;
+    }
+    animation: zoom-in 0.4s ease-out forwards;
+}
+
+@keyframes zoom-in {
+    0% {
+        transform: scale(0.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes img-move-2 {
+    0% {
+        opacity: 0;
+        transform: translateX(-200%) translateY(200%);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes img-move-1 {
+    0% {
+        transform: translateX(30%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

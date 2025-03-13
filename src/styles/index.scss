@@ -53,7 +53,12 @@ a {
 
 .btn {
     @include textHead;
+    transition: transform 0.2s ease-out;
     * {
         pointer-events: none;
+    }
+
+    &:hover {
+        transform: scale(1.1);
     }
 }
