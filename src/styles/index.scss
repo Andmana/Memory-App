@@ -36,8 +36,11 @@ a {
     margin: 0 1rem;
 }
 
-.icon-music {
+.icon-music__on {
     background-image: url("/icon-music-on.svg");
+}
+.icon-music__off {
+    background-image: url("/icon-music-off.svg");
 }
 .icon-help {
     background-image: url("/icon-help.svg");

@@ -1,0 +1,7 @@
+@use "variables" as *;
+
+nav {
+    @include flexCenter;
+    justify-content: start;
+    padding: 0.6rem 15%;
+}

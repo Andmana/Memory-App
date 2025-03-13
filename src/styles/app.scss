@@ -1,15 +1,5 @@
 @use "variables" as *;
 
-nav,
-footer {
-    @include flexCenter;
-    padding: 0.6rem 15%;
-}
-
-nav {
-    justify-content: start;
-}
-
 main {
     flex: 1;
     padding: 0.6rem 15%;
