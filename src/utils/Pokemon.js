@@ -17,11 +17,14 @@ const fetchRandomPokemon = async (count) => {
 
         try {
             const response = await fetch(
-                `https://pokeapi.co/api/v2/pokemon/${id}`
+                `https://pokeapi.co/api/v2/pokemon/${id}`,
+                { mode: "cors" }
             );
             const data = await response.json();
 
-            // const image = await fetch(data.sprites.front_default);
+            const image = await fetch(data.sprites.front_default, {
+                mode: "cors",
+            });
 
             const pokemon = {
                 id: data.id,

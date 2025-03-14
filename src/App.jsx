@@ -14,7 +14,7 @@ function App() {
     const [state, setState] = useState(2);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [difficulty, setDifficulty] = useState("hard");
+    const [difficulty, setDifficulty] = useState("easy");
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
@@ -85,7 +85,12 @@ function App() {
                     {state === 1 && (
                         <Difficulty handleDifficulty={handleDifficulty} />
                     )}
-                    {state === 2 && <GamePlay difficulty={difficulty} />}
+                    {state === 2 && (
+                        <GamePlay
+                            difficulty={difficulty}
+                            handleSetState={handleSetState}
+                        />
+                    )}
                 </main>
                 <footer>
                     <Footer />

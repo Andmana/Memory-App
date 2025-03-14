@@ -11,8 +11,9 @@ body {
     font-family: "JotiOne", sans-serif;
     font-size: 1.5rem;
     color: $color-theme-2;
-    -webkit-text-stroke: 4px $color-theme;
+    -webkit-text-stroke: 3px $color-theme;
     paint-order: stroke fill;
+    letter-spacing: 2px;
 
     background-image: url("/main-bg2.jpg");
     background-repeat: no-repeat;
