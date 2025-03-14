@@ -63,7 +63,7 @@
         @include flexCenter;
         img {
             margin: auto;
-            width: 90%;
+            width: 80%;
         }
     }
 }
@@ -72,6 +72,7 @@
     position: relative;
     width: 100%;
     display: inline-block;
+    margin-top: auto;
     margin-bottom: 15px;
 
     .set-height {
@@ -80,11 +81,11 @@
 
     .slide {
         width: 100%;
-        margin: 0 auto;
         white-space: nowrap;
         overflow: hidden;
         position: absolute;
-        top: 0;
+        padding-bottom: 15px;
+        bottom: 0;
         left: 0;
 
         span {
