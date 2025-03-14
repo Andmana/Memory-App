@@ -1,32 +1,30 @@
 @use "variables" as *;
 
-main {
-    flex: 1;
-    padding: 0.6rem;
+.intro-container {
     animation: zoom-in 0.4s ease-out forwards;
-}
 
-.intro-header {
-    @include flexCenter;
+    .intro-header {
+        @include flexCenter;
 
-    img {
-        height: 200px;
-    }
-}
-
-.intro-section {
-    @include flexCenter;
-    flex-direction: column;
-    color: white;
-
-    img {
-        height: 200px;
-        transform: translateY(-20%) translateX(10%);
+        img {
+            height: 200px;
+        }
     }
 
-    .gelatine {
-        animation: gelatine 0.7s infinite 0.4s;
-        font-size: 2rem;
+    .intro-section {
+        @include flexCenter;
+        flex-direction: column;
+        color: white;
+
+        img {
+            height: 200px;
+            transform: translateY(-20%) translateX(10%);
+        }
+
+        .gelatine {
+            animation: gelatine 0.7s infinite 0.4s;
+            font-size: 2rem;
+        }
     }
 }
 

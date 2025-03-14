@@ -6,6 +6,7 @@ import mainBgm from "./assets/musics/Ending.mp3";
 import Guidance from "./components/Guidance";
 import FirstLoad from "./components/FirstLoad";
 import Footer from "./components/Footer";
+import Intro from "./components/Intro";
 
 function App() {
     const [state, setState] = useState(0);
@@ -15,15 +16,6 @@ function App() {
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
-
-    //First Load
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setFirstLoad(false);
-        }, 3500);
-
-        return () => clearInterval(timer);
-    }, []);
 
     const handleSetState = (val) => {
         setState(val);
@@ -50,6 +42,7 @@ function App() {
                 src: [mainBgm],
                 html5: true,
                 loop: true,
+                autoplay: true,
                 volume: 1,
             });
         }
@@ -63,7 +56,17 @@ function App() {
         return () => {
             soundRef.current.pause();
         };
-    }, [isMusicPlaying]);
+    }, [isMusicPlaying, bgm]);
+
+    //First Load
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setFirstLoad(false);
+            setIsMusicPlaying(true);
+        }, 3500);
+
+        return () => clearInterval(timer);
+    }, []);
 
     if (isFirstLoad && state === 0) return <FirstLoad />;
 
@@ -77,7 +80,9 @@ function App() {
                         isMusicPlaying={isMusicPlaying}
                     />
                 </nav>
-                <main></main>
+                <main>
+                    <Intro handleSetState={handleSetState} state={state} />
+                </main>
                 <footer>
                     <Footer />
                 </footer>
