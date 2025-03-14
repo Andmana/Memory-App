@@ -4,6 +4,8 @@ import "./styles/app.scss";
 import Nav from "./components/Nav";
 import mainBgm from "./assets/musics/Ending.mp3";
 import Guidance from "./components/Guidance";
+import FirstLoad from "./components/FirstLoad";
+import Footer from "./components/Footer";
 
 function App() {
     const [state, setState] = useState(0);
@@ -13,6 +15,15 @@ function App() {
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
+
+    //First Load
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setFirstLoad(false);
+        }, 3500);
+
+        return () => clearInterval(timer);
+    }, []);
 
     const handleSetState = (val) => {
         setState(val);
@@ -32,15 +43,6 @@ function App() {
             volume: 1,
         });
     }, [bgm]);
-
-    //First Load
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setFirstLoad(false);
-        }, 3000);
-
-        return () => clearInterval(timer);
-    }, []);
 
     useEffect(() => {
         if (soundRef.current === null) {
@@ -63,6 +65,8 @@ function App() {
         };
     }, [isMusicPlaying]);
 
+    if (isFirstLoad && state === 0) return <FirstLoad />;
+
     return (
         <>
             <div className="app">
@@ -74,7 +78,9 @@ function App() {
                     />
                 </nav>
                 <main></main>
-                <footer></footer>
+                <footer>
+                    <Footer />
+                </footer>
             </div>
             <dialog className={isGuideOpen ? "show" : ""}>
                 <Guidance setIsGuideOpen={setIsGuideOpen} />

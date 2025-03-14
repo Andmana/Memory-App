@@ -1,11 +1,9 @@
 import "../styles/footer.scss";
 const Footer = () => {
     return (
-        <footer>
-            <div className="footer">
-                <a href="">REPO</a>
-            </div>
-        </footer>
+        <div className="footer-container">
+            <a href="">REPO</a>
+        </div>
     );
 };
 

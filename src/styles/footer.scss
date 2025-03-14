@@ -1,8 +1,7 @@
 @use "variables" as *;
 
-footer {
+.footer-container {
     @include flexCenter;
-    padding: 0.6rem 15%;
     animation: float-up 0.4s ease-out forwards;
 }
 

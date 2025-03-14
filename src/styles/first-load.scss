@@ -2,13 +2,14 @@
 
 .first-load {
     @include flexCenter;
-    flex: 1;
     flex-direction: column;
+
+    min-height: 100vh;
 }
 
 .loading-gif {
     transform: rotateY(180deg);
-    animation: walk 3s linear forwards;
+    animation: walk 3.5s ease-in forwards;
 }
 
 @keyframes walk {
