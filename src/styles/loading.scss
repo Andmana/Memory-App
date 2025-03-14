@@ -1,0 +1,16 @@
+@use "variables" as *;
+
+.loading-container {
+    padding: 2rem 15%;
+    background-color: $color-theme-transparent;
+    color: white;
+    border-top: 3px solid $color-theme-2;
+    border-bottom: 3px solid $color-theme-2;
+    border-left: none;
+    border-right: none;
+    position: absolute;
+    box-sizing: border-box;
+
+    transition: transform 0.4s ease-in, opacity 0.4s ease-in,
+        visibility 0s linear 0.4s;
+}

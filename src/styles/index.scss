@@ -17,13 +17,6 @@ body {
     background: $dark-bg-main url("/main-bg2.jpg") no-repeat center/cover;
 }
 
-#root {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 a {
     -webkit-text-stroke: 4px $color-theme;
     paint-order: stroke fill;

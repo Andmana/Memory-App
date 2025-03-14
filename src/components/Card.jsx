@@ -1,23 +1,23 @@
 import "../styles/card.scss";
-import pikachu from "/pikachu.png";
+// import pikachu from "/pikachu.png";
 import pokeball from "/pokeball.svg";
 import pokemon from "/pokemon-2.png";
 
-const Card = () => {
+const Card = ({ name, imgUrl }) => {
     return (
         <div className="card">
             <div className="card-inner">
                 <div className="card-front">
                     <div className="card-image">
-                        <img src={pikachu} alt="" />
+                        <img src={imgUrl} alt="" />
                     </div>
-                    <div class="card-text">
+                    <div className="card-text">
                         <span className="set-height">Set Height</span>
-                        <div class="slide">
-                            <span>PIKACHU </span>
+                        <div className="slide">
+                            <span>{name} </span>
                         </div>
-                        <div class="slide slide2">
-                            <span>PIKACHU </span>
+                        <div className="slide slide2">
+                            <span>{name} </span>
                         </div>
                     </div>
                 </div>

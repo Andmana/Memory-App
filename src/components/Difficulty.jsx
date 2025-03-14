@@ -12,13 +12,25 @@ const Difficulty = ({ handleDifficulty }) => {
             <section className="difficulty-section">
                 <h1>Select Difficulty</h1>
                 <div className="difficulty-buttons">
-                    <button onClick={handleDifficulty} className="btn">
+                    <button
+                        onClick={handleDifficulty}
+                        className="btn"
+                        data-diff="easy"
+                    >
                         EASY
                     </button>
-                    <button onClick={handleDifficulty} className="btn">
+                    <button
+                        onClick={handleDifficulty}
+                        className="btn"
+                        data-diff="medium"
+                    >
                         MEDIUM
                     </button>
-                    <button onClick={handleDifficulty} className="btn">
+                    <button
+                        onClick={handleDifficulty}
+                        className="btn"
+                        data-diff="hard"
+                    >
                         HARD
                     </button>
                 </div>
