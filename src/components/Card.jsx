@@ -3,13 +3,14 @@ import "../styles/card.scss";
 import pokeball from "/pokeball.svg";
 import pokemon from "/pokemon-2.png";
 
-const Card = ({ name, imgUrl }) => {
+const Card = ({ name, imageUrl }) => {
+    console.log("name, imageUrl", name, imageUrl);
     return (
         <div className="card">
             <div className="card-inner">
                 <div className="card-front">
                     <div className="card-image">
-                        <img src={imgUrl} alt="" />
+                        <img src={imageUrl} alt="" />
                     </div>
                     <div className="card-text">
                         <span className="set-height">Set Height</span>

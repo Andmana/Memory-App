@@ -1,13 +1,5 @@
 @use "variables" as *;
 
-// .cards-container {
-//     display: flex;
-//     justify-content: center;
-//     align-content: center;
-//     flex-wrap: wrap;
-//     gap: 1rem;
-// }
-
 .app {
     min-height: 100vh;
     text-align: center;
@@ -17,7 +9,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
-    gap: 1rem;
 
     nav {
         height: 80px;
@@ -27,6 +18,9 @@
     main {
         flex: 1;
         padding: 0.6rem 0;
+
+        display: flex;
+        flex-direction: column;
     }
 
     footer {

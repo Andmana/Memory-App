@@ -8,15 +8,17 @@ import FirstLoad from "./components/FirstLoad";
 import Footer from "./components/Footer";
 import Intro from "./components/Intro";
 import Difficulty from "./components/Difficulty";
+import GamePlay from "./components/GamePlay";
 
 function App() {
     const [state, setState] = useState(0);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [difficulty, setDifficulty] = useState("");
+    const [difficulty, setDifficulty] = useState("easy");
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
+    const hasMusicStarted = useRef(false); // Menyimpan status apakah musik telah dimulai otomatis
 
     const handleSetState = (val) => {
         setState(val);
@@ -30,7 +32,7 @@ function App() {
 
     useEffect(() => {
         soundRef.current = new Howl({
-            src: [mainBgm],
+            src: [bgm],
             html5: true,
             loop: true,
             volume: 1,
@@ -38,35 +40,27 @@ function App() {
     }, [bgm]);
 
     useEffect(() => {
-        if (soundRef.current === null) {
-            soundRef.current = new Howl({
-                src: [mainBgm],
-                html5: true,
-                loop: true,
-                autoplay: true,
-                volume: 1,
-            });
-        }
+        if (!soundRef.current) return;
 
         if (isMusicPlaying) {
             soundRef.current.play();
         } else {
             soundRef.current.pause();
         }
+    }, [isMusicPlaying]);
 
-        return () => {
-            soundRef.current.pause();
-        };
-    }, [isMusicPlaying, bgm]);
-
-    //First Load
     useEffect(() => {
-        const timer = setInterval(() => {
+        const timer = setTimeout(() => {
             setFirstLoad(false);
-            setIsMusicPlaying(true);
+
+            // Hanya set musik menyala jika belum pernah dimatikan manual
+            if (!hasMusicStarted.current) {
+                setIsMusicPlaying(true);
+                hasMusicStarted.current = true;
+            }
         }, 3500);
 
-        return () => clearInterval(timer);
+        return () => clearTimeout(timer);
     }, []);
 
     if (isFirstLoad && state === 0) return <FirstLoad />;
@@ -77,7 +71,10 @@ function App() {
                 <nav>
                     <Nav
                         setIsGuideOpen={setIsGuideOpen}
-                        setIsMusicPlaying={setIsMusicPlaying}
+                        setIsMusicPlaying={(val) => {
+                            setIsMusicPlaying(val);
+                            hasMusicStarted.current = true; // Tandai bahwa user mengubah status musik
+                        }}
                         isMusicPlaying={isMusicPlaying}
                     />
                 </nav>
@@ -88,6 +85,7 @@ function App() {
                     {state === 1 && (
                         <Difficulty handleDifficulty={handleDifficulty} />
                     )}
+                    {state === 2 && <GamePlay difficulty={difficulty} />}
                 </main>
                 <footer>
                     <Footer />
@@ -101,11 +99,3 @@ function App() {
 }
 
 export default App;
-
-/*
-    GAME STATE
-    0 INTRO
-    1 SET DIFICULTY
-    2 GAME PLAY
-    3. GAME OVER
-*/

@@ -1,6 +1,7 @@
 @use "variables" as *;
 
 .difficulty-container {
+    flex: 1;
     display: flex;
     flex-direction: column;
 
@@ -9,14 +10,12 @@
         flex-wrap: wrap;
 
         img:nth-of-type(1) {
-            height: 200px;
-            max-width: 320px;
+            max-width: 420px;
             animation: img-move-1 0.4s ease-out forwards;
         }
 
         img:nth-of-type(2) {
             max-width: 320px;
-            height: 150px;
             animation: img-move-2 0.4s ease-out forwards;
         }
     }

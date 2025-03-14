@@ -4,14 +4,14 @@ const Loading = () => {
     return (
         <div className="loading-container">
             <div className="loading-detail">
-                <h1>Dificullty : Hard</h1>
-                <h2>Total Cards : 10</h2>
+                <p>Dificullty : Hard</p>
+                <p>Total Cards : 10</p>
             </div>
-            <div className="loading-images">
-                <div>Loading</div>
-                <div>.</div>
-                <div>.</div>
-                <div>.</div>
+            <div className="loading-image">
+                <p>Loading</p>
+                <div style={{ "--delay": "0s" }}>.</div>
+                <div style={{ "--delay": "1s" }}>.</div>
+                <div style={{ "--delay": "2s" }}>.</div>
             </div>
         </div>
     );

@@ -1,16 +1,66 @@
 @use "variables" as *;
 
 .loading-container {
+    @include flexCenter;
+    align-items: stretch;
+    flex-wrap: wrap;
+
     padding: 2rem 15%;
+    width: 100%;
     background-color: $color-theme-transparent;
-    color: white;
+    background-image: url("/gengar.png");
+    background-size: fill;
+    background-position: 80% 50%;
+    background-repeat: no-repeat;
+
+    color: $color-theme-2;
+
     border-top: 3px solid $color-theme-2;
     border-bottom: 3px solid $color-theme-2;
     border-left: none;
     border-right: none;
+
     position: absolute;
-    box-sizing: border-box;
+    left: 0;
+
+    top: 50%;
+    transform: translateY(-50%);
 
     transition: transform 0.4s ease-in, opacity 0.4s ease-in,
         visibility 0s linear 0.4s;
+
+    .loading-detail {
+        flex-shrink: 320px;
+    }
+
+    .loading-image {
+        flex: 1;
+        display: flex;
+        justify-content: end;
+        align-items: end;
+        gap: 1ch;
+        max-width: 480px;
+
+        div {
+            animation: bounce 1s ease infinite;
+            animation-delay: calc(var(--delay) / 3);
+        }
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-10px);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }

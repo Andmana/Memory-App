@@ -2,8 +2,8 @@
 
 .card {
     background-color: transparent;
-    width: 150px;
-    height: 200px;
+    width: 130px;
+    height: 180px;
     perspective: 1000px;
 
     .card-inner {
@@ -63,7 +63,7 @@
         @include flexCenter;
         img {
             margin: auto;
-            width: 90px;
+            width: 90%;
         }
     }
 }
@@ -89,13 +89,13 @@
 
         span {
             display: inline-block;
-            margin: 10px;
+            padding-right: 2ch;
             padding-left: 100%;
-            animation: slide 5s linear infinite;
+            animation: slide 7s linear infinite;
         }
 
         &.slide2 span {
-            animation-delay: 2.5s;
+            animation-delay: 3.5s;
         }
     }
 }
