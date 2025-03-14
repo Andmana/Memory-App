@@ -1,59 +1,65 @@
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
-import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import "../styles/gameplay.scss";
 
-const totalCards = {
+// Difficulty levels and their corresponding number of cards
+const TOTAL_CARDS_BY_DIFFICULTY = {
     easy: 3,
     medium: 5,
     hard: 10,
 };
 
 const GamePlay = ({ difficulty }) => {
-    const cardDifficulty = totalCards[difficulty];
+    const numberOfCards = TOTAL_CARDS_BY_DIFFICULTY[difficulty];
     const [isCardFlipped, setIsCardFlipped] = useState(false);
-    const [pokemonLists, setPokemonLists] = useState([]);
+    const [pokemonList, setPokemonList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [pickedIds, setPickedIds] = useState([]);
+    const [pickedCardIds, setPickedCardIds] = useState([]);
 
-    const handlePickCard = ({ target }) => {
-        const id = parseInt(target.dataset.id);
-        setPickedIds([...pickedIds, id]);
+    // Handle card selection
+    const handleCardPick = ({ target }) => {
+        const cardId = parseInt(target.dataset.id);
+        setPickedCardIds([...pickedCardIds, cardId]);
     };
 
-    // card flipped and fliped back
+    // Flip cards and shuffle after a card is picked
     useEffect(() => {
-        setIsCardFlipped(true);
-        const suffled = shufflePokemons([...pokemonLists]);
-        const timer = setTimeout(() => {
-            setPokemonLists(suffled);
-            setIsCardFlipped(false);
+        setIsCardFlipped(true); // Flip all cards face-up
+
+        const shuffledPokemon = shufflePokemons([...pokemonList]); // Shuffle the Pokémon list
+        const flipTimer = setTimeout(() => {
+            setPokemonList(shuffledPokemon); // Update the list with shuffled Pokémon
+            setTimeout(() => {
+                setIsCardFlipped(false); // Flip cards back face-down
+            }, 500);
         }, 500);
 
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [pickedIds.length]);
+        return () => clearTimeout(flipTimer); // Cleanup timer
+    }, [pickedCardIds.length]);
 
+    // Fetch Pokémon data on component mount
     useEffect(() => {
-        const fetchPokemonData = async () => {
+        const fetchData = async () => {
             try {
-                const data = await fetchRandomPokemon(cardDifficulty);
+                const pokemonData = await fetchRandomPokemon(numberOfCards);
+                setPokemonList(pokemonData);
                 setIsLoading(false);
-                setPokemonLists(data);
             } catch (error) {
-                setIsLoading(false);
                 console.error("Error fetching Pokémon data:", error);
+                setIsLoading(false);
             }
         };
-        fetchPokemonData();
-    }, []);
+        fetchData();
+    }, [numberOfCards]);
 
+    // Show loading spinner while data is being fetched
     if (isLoading) return <Loading />;
 
     return (
         <div className="gameplay-container">
+            {/* Game header */}
             <div className="gameplay-header">
                 <div>
                     <button className="btn">BACK</button>
@@ -65,16 +71,18 @@ const GamePlay = ({ difficulty }) => {
                 </div>
                 <div className="mascot">Pikachu</div>
             </div>
+
+            {/* Game content */}
             <div className="gameplay-content">
                 <div className="cards-container">
-                    {pokemonLists.map((pokemon) => (
+                    {pokemonList.map((pokemon) => (
                         <Card
                             key={pokemon.id}
                             id={pokemon.id}
                             name={pokemon.name}
                             imageUrl={pokemon.imageUrl}
                             isCardFlipped={isCardFlipped}
-                            handlePickCard={handlePickCard}
+                            handlePickCard={handleCardPick}
                         />
                     ))}
                 </div>

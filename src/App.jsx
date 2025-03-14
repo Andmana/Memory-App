@@ -11,10 +11,10 @@ import Difficulty from "./components/Difficulty";
 import GamePlay from "./components/GamePlay";
 
 function App() {
-    const [state, setState] = useState(0);
+    const [state, setState] = useState(2);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [difficulty, setDifficulty] = useState("easy");
+    const [difficulty, setDifficulty] = useState("hard");
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
@@ -55,7 +55,7 @@ function App() {
 
             // Hanya set musik menyala jika belum pernah dimatikan manual
             if (!hasMusicStarted.current) {
-                setIsMusicPlaying(true);
+                // setIsMusicPlaying(true);
                 hasMusicStarted.current = true;
             }
         }, 3500);

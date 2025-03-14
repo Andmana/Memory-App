@@ -71,7 +71,16 @@
         }
     }
 
-    animation: appear 0.8s linear forwards;
+    .card-front {
+        .card-image {
+            img {
+                margin: auto;
+                width: 100%;
+            }
+        }
+    }
+
+    // animation: appear 0.8s linear forwards;
 }
 
 .card-text {
@@ -90,8 +99,7 @@
         white-space: nowrap;
         overflow: hidden;
         position: absolute;
-        padding-bottom: 15px;
-        bottom: 0;
+        top: 0;
         left: 0;
 
         span {
