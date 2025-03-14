@@ -8,15 +8,16 @@ import mainBgm from "./assets/musics/Ending.mp3";
 import FirstLoad from "./components/FirstLoad";
 import Intro from "./components/Intro";
 import Difficulty from "./components/Difficulty";
+import GamePlay from "./components/GamePlay";
 
 function App() {
-    const [isGuideOpen, setIsGuideOpen] = useState(false);
     const [state, setState] = useState(0);
+    const [isFirstLoad, setFirstLoad] = useState(true);
+    const [isGuideOpen, setIsGuideOpen] = useState(false);
     const [difficulty, setDifficulty] = useState("");
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(true);
     const soundRef = useRef(null);
-    const [isFirstLoad, setFirstLoad] = useState(true);
 
     const handleSetState = (val) => {
         setState(val);
@@ -37,6 +38,7 @@ function App() {
         });
     }, [bgm]);
 
+    //First Load
     useEffect(() => {
         const timer = setInterval(() => {
             setFirstLoad(false);
@@ -66,35 +68,28 @@ function App() {
         };
     }, [isMusicPlaying]);
 
+    if (isFirstLoad && state === 0) return <FirstLoad />;
+
     return (
         <>
-            {isFirstLoad && <FirstLoad />}
-            {!isFirstLoad && (
-                <>
-                    <Nav
-                        setIsGuideOpen={setIsGuideOpen}
-                        setIsMusicPlaying={setIsMusicPlaying}
-                        isMusicPlaying={isMusicPlaying}
-                    />
-                    <main>
-                        {state === 0 && (
-                            <Intro
-                                handleSetState={handleSetState}
-                                state={state}
-                            />
-                        )}
+            <Nav
+                setIsGuideOpen={setIsGuideOpen}
+                setIsMusicPlaying={setIsMusicPlaying}
+                isMusicPlaying={isMusicPlaying}
+            />
+            <main>
+                {state === 0 && (
+                    <Intro handleSetState={handleSetState} state={state} />
+                )}
 
-                        {state === 1 && (
-                            <Difficulty handleDifficulty={handleDifficulty} />
-                        )}
-                    </main>
-                    <Footer />
-                    <Guidance
-                        isOpen={isGuideOpen}
-                        setIsGuideOpen={setIsGuideOpen}
-                    />
-                </>
-            )}
+                {state === 1 && (
+                    <Difficulty handleDifficulty={handleDifficulty} />
+                )}
+
+                {state === 2 && <GamePlay difficulty={difficulty} />}
+            </main>
+            <Footer />
+            <Guidance isOpen={isGuideOpen} setIsGuideOpen={setIsGuideOpen} />
         </>
     );
 }
