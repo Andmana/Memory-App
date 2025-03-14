@@ -3,18 +3,18 @@
 .guidance-container {
     @include flexCenter;
     margin: auto;
+    padding: 2.5rem 1rem 1rem;
     position: relative;
     width: fit-content;
-}
 
-.dialog-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateX(100%);
+    .dialog-close {
+        position: absolute;
+        right: 0;
+        top: 0;
 
-    .icon {
-        width: 30px;
-        height: 30px;
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
     }
 }

@@ -8,18 +8,38 @@
 }
 
 body {
-    text-align: center;
-    font-size: 1.5em;
     font-family: "JotiOne", sans-serif;
+    font-size: 1.5rem;
+    color: $color-theme-2;
     -webkit-text-stroke: 4px $color-theme;
     paint-order: stroke fill;
-    color: $color-theme-2;
-    background: $dark-bg-main url("/main-bg2.jpg") no-repeat center/cover;
+
+    background-image: url("/main-bg2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+button {
+    all: unset;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
 }
 
 a {
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    color: inherit;
     -webkit-text-stroke: 4px $color-theme;
     paint-order: stroke fill;
+
+    background: transparent;
+    border: none;
 }
 
 .icon {
