@@ -7,6 +7,7 @@ import Guidance from "./components/Guidance";
 import FirstLoad from "./components/FirstLoad";
 import Footer from "./components/Footer";
 import Intro from "./components/Intro";
+import Difficulty from "./components/Difficulty";
 
 function App() {
     const [state, setState] = useState(0);
@@ -81,7 +82,12 @@ function App() {
                     />
                 </nav>
                 <main>
-                    <Intro handleSetState={handleSetState} state={state} />
+                    {state === 0 && (
+                        <Intro handleSetState={handleSetState} state={state} />
+                    )}
+                    {state === 1 && (
+                        <Difficulty handleDifficulty={handleDifficulty} />
+                    )}
                 </main>
                 <footer>
                     <Footer />

@@ -4,7 +4,7 @@ import "../styles/difficulty.scss";
 
 const Difficulty = ({ handleDifficulty }) => {
     return (
-        <>
+        <div className="difficulty-container">
             <header className="difficulty-header">
                 <img src={pokemonImg} alt="" />
                 <img src={memoryImg} alt="" />
@@ -35,7 +35,7 @@ const Difficulty = ({ handleDifficulty }) => {
                     </button>
                 </div>
             </section>
-        </>
+        </div>
     );
 };
 
