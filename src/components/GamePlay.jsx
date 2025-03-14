@@ -1,5 +1,5 @@
 import Card from "./Card";
-import { fetchRandomPokemon } from "../utils/Pokemon";
+import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import "../styles/gameplay.scss";
@@ -12,26 +12,46 @@ const totalCards = {
 
 const GamePlay = ({ difficulty }) => {
     const cardDifficulty = totalCards[difficulty];
+    const [isCardFlipped, setIsCardFlipped] = useState(false);
     const [pokemonLists, setPokemonLists] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [pickedIds, setPickedIds] = useState([]);
+
+    const handlePickCard = ({ target }) => {
+        const id = parseInt(target.dataset.id);
+        setPickedIds([...pickedIds, id]);
+    };
+
+    // card flipped and fliped back
+    useEffect(() => {
+        setIsCardFlipped(true);
+        const suffled = shufflePokemons([...pokemonLists]);
+        const timer = setTimeout(() => {
+            setPokemonLists(suffled);
+            setIsCardFlipped(false);
+        }, 500);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [pickedIds.length]);
 
     useEffect(() => {
         const fetchPokemonData = async () => {
             try {
                 const data = await fetchRandomPokemon(cardDifficulty);
+                setIsLoading(false);
                 setPokemonLists(data);
             } catch (error) {
-                console.error("Error fetching Pokémon data:", error);
-            } finally {
                 setIsLoading(false);
+                console.error("Error fetching Pokémon data:", error);
             }
         };
-
         fetchPokemonData();
-    }, [cardDifficulty]);
-    console.log("pokemonList", pokemonLists);
+    }, []);
 
     if (isLoading) return <Loading />;
+
     return (
         <div className="gameplay-container">
             <div className="gameplay-header">
@@ -50,8 +70,11 @@ const GamePlay = ({ difficulty }) => {
                     {pokemonLists.map((pokemon) => (
                         <Card
                             key={pokemon.id}
+                            id={pokemon.id}
                             name={pokemon.name}
                             imageUrl={pokemon.imageUrl}
+                            isCardFlipped={isCardFlipped}
+                            handlePickCard={handlePickCard}
                         />
                     ))}
                 </div>
