@@ -35,17 +35,16 @@ const fetchRandomPokemon = async (count) => {
             uniquePokemonIds.add(id);
             pokemonList.push(pokemon);
         } catch (error) {
-            console.log("Error fetching Pokémon:", error.message);
+            console.error("Error fetching Pokémon:", error.message);
         }
     }
 
-    return pokemonList; // Return the list of fetched Pokémon
+    return pokemonList;
 };
 
 const shufflePokemons = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
-
         [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
     }
     return array;
