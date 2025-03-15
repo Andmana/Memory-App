@@ -125,7 +125,10 @@ function App() {
                     )}
 
                     {state === 1 && (
-                        <Difficulty handleDifficulty={handleDifficulty} />
+                        <Difficulty
+                            handleDifficulty={handleDifficulty}
+                            setBgm={setBgm}
+                        />
                     )}
 
                     {state === 2 && (

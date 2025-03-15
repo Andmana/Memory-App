@@ -5,11 +5,28 @@
     flex-direction: column;
 
     min-height: 100vh;
-}
 
-.loading-gif {
-    transform: rotateY(180deg);
-    animation: walk 3.5s ease-in forwards;
+    .loading-gif {
+        transform: rotateY(180deg);
+        animation: walk 3.5s ease-in forwards;
+    }
+
+    .disclaimer-message {
+        color: white;
+        text-align: center;
+        background-color: $color-theme-2-transparent;
+
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.659);
+
+        max-width: 600px;
+        padding: 1em;
+        margin: 0 auto;
+
+        font-size: 0.9rem;
+        -webkit-text-stroke: 0;
+        paint-order: unset;
+    }
 }
 
 @keyframes walk {
