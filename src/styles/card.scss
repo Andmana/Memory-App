@@ -55,6 +55,7 @@
     }
 
     &.flipped {
+        pointer-events: none;
         .card-inner {
             transform: rotateY(180deg);
         }

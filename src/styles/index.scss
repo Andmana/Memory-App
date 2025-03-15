@@ -65,6 +65,19 @@ a {
     background-image: url("/icon-close.svg");
 }
 
+.bg-pidgey {
+    background-image: url("/pidgey.png");
+    @include bgImage;
+}
+.bg-charizard {
+    background-image: url("/charizard.png");
+    @include bgImage;
+}
+.bg-arceus {
+    background-image: url("/arceus.png");
+    @include bgImage;
+}
+
 .btn {
     @include textHead;
     transition: transform 0.2s ease-out;

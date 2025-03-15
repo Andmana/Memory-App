@@ -8,10 +8,6 @@
     padding: 2rem 15%;
     width: 100%;
     background-color: $color-theme-transparent;
-    background-image: url("/gengar.png");
-    background-size: fill;
-    background-position: 80% 50%;
-    background-repeat: no-repeat;
 
     color: $color-theme-2;
 
@@ -28,6 +24,16 @@
 
     transition: transform 0.4s ease-in, opacity 0.4s ease-in,
         visibility 0s linear 0.4s;
+
+    &.bg-pidgey {
+        background-position: 80% 50%;
+    }
+    &.bg-charizard {
+        background-position: 80% 50%;
+    }
+    &.bg-arceus {
+        background-position: 80% 50%;
+    }
 
     .loading-detail {
         flex-shrink: 320px;

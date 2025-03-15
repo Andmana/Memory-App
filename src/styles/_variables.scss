@@ -15,7 +15,13 @@ $outline: -1px -1px 0px $color-theme-2, 1px -1px 0px $color-theme-2,
     justify-content: center;
 }
 
-@mixin textHead {
+@mixin textHead() {
     font-size: 2rem;
     font-weight: 800;
+}
+
+@mixin bgImage() {
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
