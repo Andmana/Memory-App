@@ -8,11 +8,11 @@ const Card = ({
     name,
     imageUrl,
     handlePickedCard,
-    isCardFliped = false,
+    isCardFlipped = false,
 }) => {
     return (
         <div
-            className={`card ${isCardFliped ? "flipped" : ""} `}
+            className={`card ${isCardFlipped ? "flipped" : ""} `}
             data-id={id}
             onClick={handlePickedCard}
         >

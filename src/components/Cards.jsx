@@ -1,7 +1,7 @@
 import { shufflePokemons } from "../utils/Pokemon";
 import Card from "./Card";
 
-const Cards = ({ pokemonList, isCardFliped, handlePickedCard }) => {
+const Cards = ({ pokemonList, isCardFlipped, handlePickedCard }) => {
     return (
         <div className="cards-container">
             {pokemonList.map((pokemon) => (
@@ -10,7 +10,7 @@ const Cards = ({ pokemonList, isCardFliped, handlePickedCard }) => {
                     id={pokemon.id}
                     name={pokemon.name}
                     imageUrl={pokemon.imageUrl}
-                    isCardFliped={isCardFliped}
+                    isCardFlipped={isCardFlipped}
                     handlePickedCard={handlePickedCard}
                 />
             ))}
