@@ -35,18 +35,26 @@ const GamePlay = ({ difficulty, handleSetState }) => {
         setIsCardFlipped(true); // Flip cards face-up
 
         const cardId = parseInt(target.dataset.id);
-        setPickedIds([...pickedIds]); // Update picked card IDs
 
-        // Shuffle Pokémon list after a delay
-        setTimeout(() => {
-            setPokemonList(shufflePokemons([...pokemonList]));
-        }, 500);
+        if (pickedIds.includes(cardId)) {
+            handleSetState(3); // Game over
+        } else if (pickedIds.length + 1 > numberOfCards) {
+            handleSetState(4); // Game over
+        } else {
+            setPickedIds([...pickedIds, cardId]); // Update picked card IDs
 
-        // Flip cards back face-down after a delay
-        setTimeout(() => {
-            setIsCardFlipped(false);
-        }, 1500);
+            // Shuffle Pokémon list after a delay
+            setTimeout(() => {
+                setPokemonList(shufflePokemons([...pokemonList]));
+            }, 500);
+
+            // Flip cards back face-down after a delay
+            setTimeout(() => {
+                setIsCardFlipped(false);
+            }, 1500);
+        }
     };
+    console.log("pickedIds", pickedIds);
 
     // Fetch Pokémon data on component mount
     useEffect(() => {
@@ -80,11 +88,13 @@ const GamePlay = ({ difficulty, handleSetState }) => {
                     </button>
                 </div>
                 <div>
-                    <div className="game-mode">DIFFICULTY</div>
+                    <div className="game-mode">- DIFFICULTY -</div>
                     <div className="game-mode__value">
                         {difficulty.toString().toUpperCase()}
                     </div>
-                    <div className="game-score">0/{numberOfCards}</div>
+                    <div className="game-score">
+                        {pickedIds.length}/{numberOfCards}
+                    </div>
                 </div>
                 <div className="mascot">{difficultyName.toUpperCase()}</div>
             </div>

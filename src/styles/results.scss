@@ -1,0 +1,34 @@
+@use "variables" as *;
+
+.results-container {
+    flex: 1;
+
+    @include flexCenter;
+    flex-direction: column;
+
+    .results-content {
+        position: absolute;
+        width: 100%;
+
+        background-color: $color-theme-transparent;
+
+        padding: 50px 0;
+
+        &.results__win {
+            @include bgImage;
+            background-image: url("/pikachu-happy.gif");
+        }
+
+        &.results__lose {
+            @include bgImage;
+            background-image: url("/pikachu-sad.gif");
+        }
+
+        .results-actions {
+            @include flexCenter;
+            gap: 2rem;
+
+            margin-top: 50px;
+        }
+    }
+}

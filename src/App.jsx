@@ -9,9 +9,10 @@ import Footer from "./components/Footer";
 import Intro from "./components/Intro";
 import Difficulty from "./components/Difficulty";
 import GamePlay from "./components/GamePlay";
+import Results from "./components/Results";
 
 function App() {
-    const [state, setState] = useState(2);
+    const [state, setState] = useState(0);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
 
@@ -89,6 +90,15 @@ function App() {
                     {state === 2 && (
                         <GamePlay
                             difficulty={difficulty}
+                            handleSetState={handleSetState}
+                        />
+                    )}
+                    {state === 4 && (
+                        <Results isWin={true} handleSetState={handleSetState} />
+                    )}
+                    {state === 3 && (
+                        <Results
+                            isWin={false}
                             handleSetState={handleSetState}
                         />
                     )}
