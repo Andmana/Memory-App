@@ -14,11 +14,13 @@ function App() {
     const [state, setState] = useState(2);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [difficulty, setDifficulty] = useState("easy");
+
     const [bgm, setBgm] = useState(mainBgm);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
-    const hasMusicStarted = useRef(false); // Menyimpan status apakah musik telah dimulai otomatis
+    const hasMusicStarted = useRef(false);
+
+    const [difficulty, setDifficulty] = useState("easy");
 
     const handleSetState = (val) => {
         setState(val);
@@ -30,6 +32,7 @@ function App() {
         setState(2);
     };
 
+    // Change bgm
     useEffect(() => {
         soundRef.current = new Howl({
             src: [bgm],
@@ -39,6 +42,7 @@ function App() {
         });
     }, [bgm]);
 
+    // play / pause music
     useEffect(() => {
         if (!soundRef.current) return;
 
@@ -49,11 +53,11 @@ function App() {
         }
     }, [isMusicPlaying]);
 
+    // first mount
     useEffect(() => {
         const timer = setTimeout(() => {
             setFirstLoad(false);
 
-            // Hanya set musik menyala jika belum pernah dimatikan manual
             if (!hasMusicStarted.current) {
                 // setIsMusicPlaying(true);
                 hasMusicStarted.current = true;
@@ -71,10 +75,7 @@ function App() {
                 <nav>
                     <Nav
                         setIsGuideOpen={setIsGuideOpen}
-                        setIsMusicPlaying={(val) => {
-                            setIsMusicPlaying(val);
-                            hasMusicStarted.current = true; // Tandai bahwa user mengubah status musik
-                        }}
+                        setIsMusicPlaying={setIsMusicPlaying}
                         isMusicPlaying={isMusicPlaying}
                     />
                 </nav>
