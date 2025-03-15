@@ -3,12 +3,20 @@
 .app {
     min-height: 100vh;
     text-align: center;
-    padding: 0 15%;
+    padding: $padding-lg;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
+
+    @media (max-width: $breakpoint-xs) {
+        padding: $padding-sm;
+    }
+
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+        padding: $padding-md;
+    }
 
     nav {
         height: 80px;
@@ -30,11 +38,9 @@
 }
 
 dialog {
+    @include borderY($color-theme);
     background-color: $color-theme-2-transparent;
-    border-top: 3px solid $color-theme;
-    border-bottom: 3px solid $color-theme;
-    border-left: none;
-    border-right: none;
+
     color: white;
     text-align: center;
 

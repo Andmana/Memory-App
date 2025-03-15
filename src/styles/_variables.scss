@@ -12,19 +12,31 @@ $breakpoint-sm: 768px; // Small devices (tablet)
 $breakpoint-md: 1024px; // Medium devices (small desktop)
 $breakpoint-lg: 1200px; // Large devices (large desktop)
 
+$padding-sm: 10px;
+$padding-md: 0 10%;
+$padding-lg: 0 15%;
+
 @mixin flexCenter() {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-@mixin textHead() {
-    font-size: 2rem;
-    font-weight: 800;
-}
-
 @mixin bgImage($horizontal: 80%) {
     background-position: $horizontal 50%;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+@mixin borderY($border-color) {
+    border-top: 3px solid $border-color;
+    border-bottom: 3px solid $border-color;
+    border-left: none;
+    border-right: none;
+}
+
+@mixin fontStyle($font-color, $stroke-color) {
+    color: $font-color;
+    -webkit-text-stroke: 5px $stroke-color;
+    paint-order: stroke fill;
 }

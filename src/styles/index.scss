@@ -8,18 +8,23 @@
 }
 
 body {
+    @include fontStyle($color-theme, $color-theme-2);
     font-family: "JotiOne", sans-serif;
     font-size: 1.5rem;
-    color: $color-theme-2;
-    -webkit-text-stroke: 3px $color-theme;
-    paint-order: stroke fill;
-    letter-spacing: 2px;
 
     background-image: url("/main-bg1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+
+    @media (max-width: $breakpoint-xs) {
+        font-size: 0.95rem;
+    }
+
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+        font-size: 1.3rem;
+    }
 }
 
 button {
@@ -28,27 +33,39 @@ button {
     border: none;
     padding: 0;
     margin: 0;
-    font: inherit;
     cursor: pointer;
 }
 
 a {
+    @include fontStyle(white, $color-theme-2);
     text-decoration: underline;
-    text-underline-offset: 10px;
-    color: inherit;
-    -webkit-text-stroke: 4px $color-theme;
-    paint-order: stroke fill;
+    text-underline-offset: 5px;
 
     background: transparent;
     border: none;
+
+    transition: transform 0.4s ease-in;
+
+    &:hover {
+        transform: scale(1.2);
+    }
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background-size: cover;
     background-repeat: no-repeat;
-    margin: 0 1rem;
+
+    @media (max-width: $breakpoint-xs) {
+        width: 30px;
+        height: 30px;
+    }
+
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .icon-music__on {
@@ -79,13 +96,15 @@ a {
 }
 
 .btn {
-    @include textHead;
     transition: transform 0.2s ease-out;
+    margin: 0.1em 0.5em;
+    font-size: 1.3em;
+
     * {
         pointer-events: none;
     }
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 }

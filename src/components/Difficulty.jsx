@@ -10,7 +10,7 @@ const Difficulty = ({ handleDifficulty }) => {
                 <img src={memoryImg} alt="" />
             </header>
             <section className="difficulty-section">
-                <h1>Select Difficulty</h1>
+                <h1>SELECT DIFFICULTY</h1>
                 <div className="difficulty-buttons">
                     <button
                         onClick={handleDifficulty}

@@ -84,23 +84,27 @@ function App() {
                     {state === 0 && (
                         <Intro handleSetState={handleSetState} state={state} />
                     )}
+
                     {state === 1 && (
                         <Difficulty handleDifficulty={handleDifficulty} />
                     )}
+
                     {state === 2 && (
                         <GamePlay
                             difficulty={difficulty}
                             handleSetState={handleSetState}
                         />
                     )}
-                    {state === 4 && (
-                        <Results isWin={true} handleSetState={handleSetState} />
-                    )}
+
                     {state === 3 && (
                         <Results
                             isWin={false}
                             handleSetState={handleSetState}
                         />
+                    )}
+
+                    {state === 4 && (
+                        <Results isWin={true} handleSetState={handleSetState} />
                     )}
                 </main>
                 <footer>

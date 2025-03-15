@@ -2,6 +2,7 @@
 
 .guidance-container {
     @include flexCenter;
+    @include fontStyle(white, $color-theme-2);
     margin: auto;
     padding: 2.5rem 1rem 1rem;
     position: relative;

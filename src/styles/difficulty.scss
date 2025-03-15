@@ -10,13 +10,13 @@
         flex-wrap: wrap;
 
         img:nth-of-type(1) {
-            max-width: 420px;
-            animation: img-move-1 0.4s ease-out forwards;
+            max-width: 400px;
+            animation: img-move-1 1s ease-out forwards;
         }
 
         img:nth-of-type(2) {
             max-width: 320px;
-            animation: img-move-2 0.4s ease-out forwards;
+            animation: img-move-2 1s ease-out forwards;
         }
     }
 
@@ -24,19 +24,26 @@
         flex: 1;
         @include flexCenter;
         flex-direction: column;
-        gap: 2rem;
+        flex-wrap: wrap;
+        gap: 2em;
 
         .difficulty-buttons {
             @include flexCenter();
-            gap: 2rem;
+            gap: 2em;
         }
-        animation: zoom-in 0.4s ease-out forwards;
+        animation: zoom-in 1s ease-out forwards;
     }
 }
 
 @keyframes zoom-in {
     0% {
         transform: scale(0.1);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(0.1);
+        opacity: 1;
     }
 
     100% {
@@ -50,7 +57,7 @@
         transform: translateX(-200%) translateY(200%);
     }
 
-    20% {
+    70% {
         opacity: 1;
     }
 
