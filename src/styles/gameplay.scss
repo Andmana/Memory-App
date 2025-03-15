@@ -13,10 +13,12 @@
         margin-bottom: 1rem;
 
         background-position: 100% 50%;
+        animation: header-animations 1s ease-out forwards;
     }
 
     .gameplay-content {
         @include flexCenter;
+        overflow-x: hidden;
         flex: 1;
 
         .cards-container {
@@ -26,6 +28,27 @@
             align-content: center;
             flex-wrap: wrap;
             gap: 1rem;
+            animation: cards-animation 1s ease-out forwards;
         }
+    }
+}
+
+@keyframes header-animations {
+    0% {
+        transform: translateY(200%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes cards-animation {
+    0% {
+        transform: translateX(50%);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }
