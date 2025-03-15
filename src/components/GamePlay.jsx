@@ -38,7 +38,7 @@ const GamePlay = ({ difficulty, handleSetState }) => {
 
         if (pickedIds.includes(cardId)) {
             handleSetState(3); // Game over
-        } else if (pickedIds.length + 1 > numberOfCards) {
+        } else if (pickedIds.length + 1 === numberOfCards) {
             handleSetState(4); // Game over
         } else {
             setPickedIds([...pickedIds, cardId]); // Update picked card IDs

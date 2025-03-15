@@ -1,13 +1,16 @@
 $dark-text-main: white;
 $dark-bg-main: #242424;
 
-$color-theme: #f833c1;
-$color-theme-transparent: #f833c0b6;
-$color-theme-2: #0b1548;
-$color-theme-2-transparent: #0b1548a6;
+$color-theme: #ffcc01;
+$color-theme-transparent: #ffcc01ba;
+$color-theme-2: #365fac;
+$color-theme-2-transparent: #365faccc;
 
-$outline: -1px -1px 0px $color-theme-2, 1px -1px 0px $color-theme-2,
-    -1px 1px 0px $color-theme-2, 1px 1px 0px $color-theme-2;
+// Breakpoints for different screen sizes
+$breakpoint-xs: 480px; // Extra small devices (mobile)
+$breakpoint-sm: 768px; // Small devices (tablet)
+$breakpoint-md: 1024px; // Medium devices (small desktop)
+$breakpoint-lg: 1200px; // Large devices (large desktop)
 
 @mixin flexCenter() {
     display: flex;
@@ -20,8 +23,8 @@ $outline: -1px -1px 0px $color-theme-2, 1px -1px 0px $color-theme-2,
     font-weight: 800;
 }
 
-@mixin bgImage() {
-    background-position: 100% 50%;
+@mixin bgImage($horizontal: 80%) {
+    background-position: $horizontal 50%;
     background-repeat: no-repeat;
     background-size: contain;
 }
