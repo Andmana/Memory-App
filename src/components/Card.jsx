@@ -3,9 +3,19 @@ import "../styles/card.scss";
 import pokeball from "/pokeball.svg";
 import pokemon from "/pokemon-2.png";
 
-const Card = ({ id, name, imageUrl, handlePickCard }) => {
+const Card = ({
+    id,
+    name,
+    imageUrl,
+    handlePickedCard,
+    isCardFliped = false,
+}) => {
     return (
-        <div onClick={handlePickCard} className={`card `} data-id={id}>
+        <div
+            className={`card ${isCardFliped ? "flipped" : ""} `}
+            data-id={id}
+            onClick={handlePickedCard}
+        >
             <div className="card-inner">
                 <div className="card-front">
                     <div className="card-image">

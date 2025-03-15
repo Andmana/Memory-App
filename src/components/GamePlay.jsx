@@ -3,6 +3,7 @@ import Card from "./Card";
 import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import Loading from "./Loading";
 import "../styles/gameplay.scss";
+import Cards from "./Cards";
 
 const TOTAL_CARDS_BY_DIFFICULTY = {
     easy: 3,
@@ -12,53 +13,43 @@ const TOTAL_CARDS_BY_DIFFICULTY = {
 
 const GamePlay = ({ difficulty, handleSetState }) => {
     const numberOfCards = TOTAL_CARDS_BY_DIFFICULTY[difficulty];
-    const [isCardFlipped, setIsCardFlipped] = useState(true);
+
+    const [isCardFliped, setIsCardFlipped] = useState(true);
     const [pokemonList, setPokemonList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [pickedCardIds, setPickedCardIds] = useState([]);
+    const [pickedIds, setPickedIds] = useState([]);
 
-    // Handle card selection
-    const handleCardPick = ({ target }) => {
+    const handlePickedCard = ({ target }) => {
+        setIsCardFlipped(true);
+
         const cardId = parseInt(target.dataset.id);
-        setPickedCardIds([...pickedCardIds, cardId]);
-    };
+        setPickedIds([...pickedIds]);
 
-    // Flip cards and shuffle after a card is picked
-    useEffect(() => {
-        setIsCardFlipped(true); // Flip all cards face-up
-
-        const shuffledPokemon = shufflePokemons([...pokemonList]); // Shuffle the Pokémon list
-        const flipTimer = setTimeout(() => {
-            setPokemonList(shuffledPokemon); // Update the list with shuffled Pokémon
-            setTimeout(() => {
-                setIsCardFlipped(false); // Flip cards back face-down
-            }, 500);
+        setTimeout(() => {
+            setPokemonList(shufflePokemons([...pokemonList]));
         }, 500);
 
-        return () => clearTimeout(flipTimer); // Cleanup timer
-    }, [pickedCardIds.length]);
+        setTimeout(() => {
+            setIsCardFlipped(false);
+        }, 1500);
+    };
 
-    // Fetch Pokémon data on component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const pokemonData = await fetchRandomPokemon(numberOfCards);
                 setPokemonList(pokemonData);
-                setIsLoading(false);
             } catch (error) {
                 console.error("Error fetching Pokémon data:", error);
+            } finally {
                 setIsLoading(false);
+                setTimeout(() => {
+                    setIsCardFlipped(false);
+                }, 500);
             }
         };
         fetchData();
     }, [numberOfCards]);
-
-    useEffect(() => {
-        const cards = document.querySelectorAll(".card");
-        cards.forEach((card) => {
-            card.classList.toggle("flipped");
-        });
-    }, [isCardFlipped]);
 
     // Show loading spinner while data is being fetched
     if (isLoading) return <Loading />;
@@ -82,17 +73,11 @@ const GamePlay = ({ difficulty, handleSetState }) => {
 
             {/* Game content */}
             <div className="gameplay-content">
-                <div className="cards-container">
-                    {pokemonList.map((pokemon) => (
-                        <Card
-                            key={pokemon.id}
-                            id={pokemon.id}
-                            name={pokemon.name}
-                            imageUrl={pokemon.imageUrl}
-                            handlePickCard={handleCardPick}
-                        />
-                    ))}
-                </div>
+                <Cards
+                    pokemonList={pokemonList}
+                    isCardFliped={isCardFliped}
+                    handlePickedCard={handlePickedCard}
+                />
             </div>
         </div>
     );
