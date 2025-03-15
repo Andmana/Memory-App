@@ -21,11 +21,6 @@ const fetchRandomPokemon = async (count) => {
                 { mode: "cors" }
             );
             const data = await response.json();
-
-            const image = await fetch(data.sprites.front_default, {
-                mode: "cors",
-            });
-
             const pokemon = {
                 id: data.id,
                 name: data.name,
