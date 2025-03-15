@@ -4,16 +4,15 @@ import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import Loading from "./Loading";
 import "../styles/gameplay.scss";
 
-// Difficulty levels and their corresponding number of cards
 const TOTAL_CARDS_BY_DIFFICULTY = {
     easy: 3,
     medium: 5,
     hard: 10,
 };
 
-const GamePlay = ({ difficulty }) => {
+const GamePlay = ({ difficulty, handleSetState }) => {
     const numberOfCards = TOTAL_CARDS_BY_DIFFICULTY[difficulty];
-    const [isCardFlipped, setIsCardFlipped] = useState(false);
+    const [isCardFlipped, setIsCardFlipped] = useState(true);
     const [pokemonList, setPokemonList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [pickedCardIds, setPickedCardIds] = useState([]);
@@ -54,6 +53,13 @@ const GamePlay = ({ difficulty }) => {
         fetchData();
     }, [numberOfCards]);
 
+    useEffect(() => {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.classList.toggle("flipped");
+        });
+    }, [isCardFlipped]);
+
     // Show loading spinner while data is being fetched
     if (isLoading) return <Loading />;
 
@@ -62,7 +68,9 @@ const GamePlay = ({ difficulty }) => {
             {/* Game header */}
             <div className="gameplay-header">
                 <div>
-                    <button className="btn">BACK</button>
+                    <button className="btn" onClick={() => handleSetState(1)}>
+                        BACK
+                    </button>
                 </div>
                 <div>
                     <div className="game-mode">Difficulty</div>
@@ -81,7 +89,6 @@ const GamePlay = ({ difficulty }) => {
                             id={pokemon.id}
                             name={pokemon.name}
                             imageUrl={pokemon.imageUrl}
-                            isCardFlipped={isCardFlipped}
                             handlePickCard={handleCardPick}
                         />
                     ))}
