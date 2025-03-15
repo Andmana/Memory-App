@@ -7,21 +7,24 @@ import Cards from "./Cards";
 // Difficulty configuration
 const DIFFICULTIES = {
     easy: {
+        name: "EASY",
+        pokemon: "PIDGEY",
         cards: 4,
-        name: "Pidgey",
     },
     medium: {
+        name: "MEDIUM",
+        pokemon: "CHARIZARD",
         cards: 8,
-        name: "Charizard",
     },
     hard: {
+        name: "HARD",
         cards: 12,
-        name: "Arceus",
+        pokemon: "ARCEUS",
     },
 };
 
 const GamePlay = ({ difficulty, handleSetState }) => {
-    const { cards: numberOfCards, name: difficultyName } =
+    const { cards: numberOfCards, pokemon: difficultyName } =
         DIFFICULTIES[difficulty];
 
     // State variables

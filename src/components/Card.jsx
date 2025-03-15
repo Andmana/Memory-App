@@ -24,10 +24,10 @@ const Card = ({
                     <div className="card-text">
                         <span className="set-height">Set Height</span>
                         <div className="slide">
-                            <span>{name} </span>
+                            <span>{name.toUpperCase()} </span>
                         </div>
                         <div className="slide slide2">
-                            <span>{name} </span>
+                            <span>{name.toUpperCase()} </span>
                         </div>
                     </div>
                 </div>
