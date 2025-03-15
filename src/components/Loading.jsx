@@ -3,11 +3,12 @@ import "../styles/loading.scss";
 const Loading = ({ difficulty }) => {
     return (
         <div
-            className={`loading-container bg-${difficulty.name.toLowerCase()}`}
+            className={`loading-container bg-${difficulty.pokemon.toLowerCase()}`}
         >
             <div className="loading-detail">
-                <p>Dificullty : {difficulty.name}</p>
-                <p>Total Cards : {difficulty.cards}</p>
+                <p>DIFFICULTY : {difficulty.name}</p>
+                <p>TOTAL CARDS : {difficulty.cards}</p>
+                <p>{difficulty.pokemon}</p>
             </div>
             <div className={`loading-image `}>
                 <p>Loading</p>
