@@ -34,8 +34,8 @@
         }
 
         .card-front {
-            background-color: $color-theme-transparent;
-            border: 2px solid $color-theme-2;
+            background-color: $color-theme-2-transparent;
+            border: 2px solid $color-theme;
         }
 
         .card-back {
@@ -45,7 +45,7 @@
 
             padding: 10px;
             background-color: $color-theme-2-transparent;
-            border: 2px solid $color-theme;
+            border: 2px solid white;
             transform: rotateY(180deg);
 
             .rotate {

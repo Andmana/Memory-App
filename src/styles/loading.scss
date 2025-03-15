@@ -2,19 +2,16 @@
 
 .loading-container {
     @include flexCenter;
+    @include borderY(white);
+    @include fontStyle(white, $color-theme-2);
+
     align-items: stretch;
     flex-wrap: wrap;
 
     padding: 2rem 15%;
     width: 100%;
-    background-color: $color-theme-transparent;
-
-    color: $color-theme-2;
-
-    border-top: 3px solid $color-theme-2;
-    border-bottom: 3px solid $color-theme-2;
-    border-left: none;
-    border-right: none;
+    background-color: $color-theme-2-transparent;
+    background-position: 80% 50%;
 
     position: absolute;
     left: 0;
@@ -25,22 +22,15 @@
     transition: transform 0.4s ease-in, opacity 0.4s ease-in,
         visibility 0s linear 0.4s;
 
-    &.bg-pidgey {
-        background-position: 80% 50%;
-    }
-    &.bg-charizard {
-        background-position: 80% 50%;
-    }
-    &.bg-arceus {
-        background-position: 80% 50%;
-    }
-
     .loading-detail {
-        flex-shrink: 320px;
+        flex-basis: 320px;
+        text-align: start;
+        margin-bottom: 1rem;
     }
 
     .loading-image {
         flex: 1;
+        flex-basis: 300px;
         display: flex;
         justify-content: end;
         align-items: end;
@@ -50,6 +40,17 @@
         div {
             animation: bounce 1s ease infinite;
             animation-delay: calc(var(--delay) / 3);
+        }
+    }
+
+    @media (max-width: $breakpoint-xs) {
+        justify-content: start;
+        background-position: 100% 50%;
+        padding: 10px;
+
+        .loading-image {
+            text-align: start;
+            justify-content: start;
         }
     }
 }
