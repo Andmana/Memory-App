@@ -43,14 +43,6 @@ function App() {
         setBgm(bgms[val]);
     };
 
-    // Handle difficulty changes
-    const handleDifficulty = ({ target }) => {
-        const diff = target.dataset.diff;
-        setDifficulty(diff);
-        setBgm(bgms[2]); // gameplay music
-        setState(2); // move to gameplay state
-    };
-
     // Centralized music management logic
     const manageMusicPlayback = (bgmSource) => {
         if (soundRef.current) {
@@ -125,7 +117,11 @@ function App() {
                     )}
 
                     {state === 1 && (
-                        <Difficulty handleDifficulty={handleDifficulty} />
+                        <Difficulty
+                            setState={setState}
+                            setDifficulty={setDifficulty}
+                            setBgm={setBgm}
+                        />
                     )}
 
                     {state === 2 && (

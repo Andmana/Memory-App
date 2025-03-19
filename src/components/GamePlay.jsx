@@ -6,17 +6,17 @@ import Cards from "./Cards";
 
 // Difficulty configuration
 const DIFFICULTIES = {
-    easy: {
+    EASY: {
         name: "EASY",
         pokemon: "PIDGEY",
         cards: 4,
     },
-    medium: {
+    MEDIUM: {
         name: "MEDIUM",
         pokemon: "CHARIZARD",
         cards: 8,
     },
-    hard: {
+    HARD: {
         name: "HARD",
         cards: 12,
         pokemon: "ARCEUS",

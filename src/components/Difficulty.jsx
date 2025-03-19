@@ -2,7 +2,14 @@ import pokemonImg from "/pokemon.png";
 import memoryImg from "/memory-card.png";
 import "../styles/difficulty.scss";
 
-const Difficulty = ({ handleDifficulty }) => {
+import difficultyBGM from "../assets/musics/difficulty-bgm.mp3";
+
+const Difficulty = ({ setState, setDifficulty, setBgm }) => {
+    const handleDifficulty = (diffulcty) => {
+        setState(2);
+        setBgm(difficultyBGM);
+        setDifficulty(diffulcty);
+    };
     return (
         <div className="difficulty-container">
             <header className="difficulty-header">
@@ -13,23 +20,20 @@ const Difficulty = ({ handleDifficulty }) => {
                 <h1>SELECT DIFFICULTY</h1>
                 <div className="difficulty-buttons">
                     <button
-                        onClick={handleDifficulty}
+                        onClick={() => handleDifficulty("EASY")}
                         className="btn"
-                        data-diff="easy"
                     >
                         EASY
                     </button>
                     <button
-                        onClick={handleDifficulty}
+                        onClick={() => handleDifficulty("MEDIUM")}
                         className="btn"
-                        data-diff="medium"
                     >
                         MEDIUM
                     </button>
                     <button
-                        onClick={handleDifficulty}
+                        onClick={() => handleDifficulty("HARD")}
                         className="btn"
-                        data-diff="hard"
                     >
                         HARD
                     </button>
