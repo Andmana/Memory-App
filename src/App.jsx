@@ -17,14 +17,7 @@ import winBGM from "./assets/musics/win-bgm.mp3";
 import loseBGM from "./assets/musics/lose-bgm.mp3";
 import landingBGM from "./assets/musics/landing-bgm.mp3";
 
-/* 
-    0. Landing
-    1. Intro
-    2. Set Difficulty
-    3. WIN
-    4. LOSE
-*/
-
+// Mapping background music to states
 const bgms = {
     99: landingBGM,
     0: introBGM,
@@ -38,35 +31,35 @@ function App() {
     const [state, setState] = useState(0);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-
     const [bgm, setBgm] = useState(landingBGM);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
-    const hasMusicStarted = useRef(false);
-
+    const [hasMusicStarted, setHasMusicStarted] = useState(false);
     const [difficulty, setDifficulty] = useState("hard");
 
+    // Function to handle state transitions
     const handleSetState = (val) => {
         setState(val);
         setBgm(bgms[val]);
     };
 
+    // Handle difficulty changes
     const handleDifficulty = ({ target }) => {
         const diff = target.dataset.diff;
         setDifficulty(diff);
-        setBgm(bgms[2]);
-        setState(2);
+        setBgm(bgms[2]); // gameplay music
+        setState(2); // move to gameplay state
     };
 
-    // Change bgm
-    useEffect(() => {
+    // Centralized music management logic
+    const manageMusicPlayback = (bgmSource) => {
         if (soundRef.current) {
             soundRef.current.stop();
             soundRef.current.unload();
         }
 
         soundRef.current = new Howl({
-            src: [bgm],
+            src: [bgmSource],
             html5: true,
             loop: true,
             volume: 1,
@@ -75,37 +68,40 @@ function App() {
         if (isMusicPlaying) {
             soundRef.current.play();
         }
+    };
+
+    // Manage BGM when it changes
+    useEffect(() => {
+        manageMusicPlayback(bgm);
 
         return () => {
-            soundRef.current.stop();
-            soundRef.current.unload();
+            if (soundRef.current) {
+                soundRef.current.stop();
+                soundRef.current.unload();
+            }
         };
     }, [bgm]);
 
-    // play / pause music
+    // Play/Pause music when the `isMusicPlaying` state changes
     useEffect(() => {
         if (!soundRef.current) return;
-
-        if (isMusicPlaying) {
-            soundRef.current.play();
-        } else {
-            soundRef.current.pause();
-        }
+        if (isMusicPlaying) soundRef.current.play();
+        else soundRef.current.pause();
     }, [isMusicPlaying]);
 
-    // first mount
+    // Handle the initial music playback after the first load
     useEffect(() => {
         const timer = setTimeout(() => {
             setFirstLoad(false);
-            setBgm(landingBGM);
+            setBgm(landingBGM); // Set landing music
 
-            if (!hasMusicStarted.current) {
-                setIsMusicPlaying(true);
-                hasMusicStarted.current = true;
+            if (!hasMusicStarted) {
+                setIsMusicPlaying(true); // Start music
+                setHasMusicStarted(true); // Prevent restarting music
             }
         }, 3500);
 
-        return () => clearTimeout(timer);
+        return () => clearTimeout(timer); // Cleanup timer on unmount
     }, []);
 
     if (isFirstLoad && state === 0) return <FirstLoad />;
@@ -129,10 +125,7 @@ function App() {
                     )}
 
                     {state === 1 && (
-                        <Difficulty
-                            handleDifficulty={handleDifficulty}
-                            setBgm={setBgm}
-                        />
+                        <Difficulty handleDifficulty={handleDifficulty} />
                     )}
 
                     {state === 2 && (
