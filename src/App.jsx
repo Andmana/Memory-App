@@ -97,6 +97,7 @@ function App() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setFirstLoad(false);
+            setBgm(landingBGM);
 
             if (!hasMusicStarted.current) {
                 setIsMusicPlaying(true);
@@ -121,7 +122,10 @@ function App() {
                 </nav>
                 <main>
                     {state === 0 && (
-                        <Intro handleSetState={handleSetState} state={state} />
+                        <Intro
+                            handleSetState={handleSetState}
+                            setBgm={setBgm}
+                        />
                     )}
 
                     {state === 1 && (
@@ -138,14 +142,14 @@ function App() {
                         />
                     )}
 
-                    {state === 3 && (
+                    {state === 3 && !isGuideOpen && (
                         <Results
                             isWin={false}
                             handleSetState={handleSetState}
                         />
                     )}
 
-                    {state === 4 && (
+                    {state === 4 && !isGuideOpen && (
                         <Results isWin={true} handleSetState={handleSetState} />
                     )}
                 </main>

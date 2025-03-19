@@ -27,6 +27,53 @@
     }
 }
 
+.landing-container {
+    flex: 1;
+    @include flexCenter;
+    flex-direction: column;
+    align-items: stretch;
+
+    .landing-header {
+        @include flexCenter;
+        justify-content: end;
+    }
+
+    .landing-content {
+        flex: 1;
+        @include flexCenter;
+        position: relative;
+
+        & div {
+            position: absolute;
+            top: 0;
+            animation: float-up 5s ease-out both alternate;
+        }
+
+        .landing__power {
+            animation-delay: 5s;
+
+            img {
+                width: 320px;
+            }
+        }
+    }
+}
+
+@keyframes float-up {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 @keyframes zoom-in {
     0% {
         transform: scale(0.1);

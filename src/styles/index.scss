@@ -96,6 +96,7 @@ a {
 }
 
 .btn {
+    @include fontStyle($color-theme-2, white);
     transition: transform 0.2s ease-out;
     margin: 0.1em 0.5em;
     font-size: 1.3em;
