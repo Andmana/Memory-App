@@ -3,13 +3,16 @@ import memoryImg from "/memory-card.png";
 import "../styles/difficulty.scss";
 
 import difficultyBGM from "../assets/musics/difficulty-bgm.mp3";
+import { useEffect } from "react";
 
 const Difficulty = ({ setState, setDifficulty, setBgm }) => {
     const handleDifficulty = (diffulcty) => {
         setState(2);
-        setBgm(difficultyBGM);
         setDifficulty(diffulcty);
     };
+
+    useEffect(() => setBgm(difficultyBGM), []);
+
     return (
         <div className="difficulty-container">
             <header className="difficulty-header">

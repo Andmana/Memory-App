@@ -3,6 +3,7 @@ import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import Loading from "./Loading";
 import "../styles/gameplay.scss";
 import Cards from "./Cards";
+import gameplayBGM from "../assets/musics/gameplay-bgm.mp3";
 
 // Difficulty configuration
 const DIFFICULTIES = {
@@ -23,7 +24,7 @@ const DIFFICULTIES = {
     },
 };
 
-const GamePlay = ({ difficulty, handleSetState }) => {
+const GamePlay = ({ difficulty, handleSetState, setBgm }) => {
     const { cards: numberOfCards, pokemon: difficultyName } =
         DIFFICULTIES[difficulty];
 
@@ -58,6 +59,9 @@ const GamePlay = ({ difficulty, handleSetState }) => {
         }
     };
     console.log("pickedIds", pickedIds);
+
+    // First Mount
+    useEffect(() => setBgm(gameplayBGM), []);
 
     // Fetch Pokémon data on component mount
     useEffect(() => {

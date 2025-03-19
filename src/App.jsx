@@ -128,6 +128,7 @@ function App() {
                         <GamePlay
                             difficulty={difficulty}
                             handleSetState={handleSetState}
+                            setBgm={setBgm}
                         />
                     )}
 
