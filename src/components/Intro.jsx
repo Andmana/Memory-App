@@ -1,19 +1,23 @@
 import pokemonImg from "/pokemon.png";
 import memoryImg from "/memory-card.png";
+
 import landingBGM from "../assets/musics/landing-bgm.mp3";
 import introBGM from "../assets/musics/intro-bgm.mp3";
+
 import "../styles/intro.scss";
 
 import { useEffect, useState } from "react";
 
 const Intro = ({ setState, setBgm }) => {
     const [isLanding, setIsLanding] = useState(true);
-    setBgm[landingBGM];
     useEffect(() => {
-        setTimeout(() => {
+        setBgm[landingBGM];
+        const timer = setTimeout(() => {
             setIsLanding(false);
             setBgm(introBGM);
         }, 11000);
+
+        return () => clearTimeout(timer);
     }, []);
 
     if (isLanding) {

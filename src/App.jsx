@@ -10,28 +10,11 @@ import Difficulty from "./components/Difficulty";
 import GamePlay from "./components/GamePlay";
 import Results from "./components/Results";
 
-import introBGM from "./assets/musics/intro-bgm.mp3";
-import difficultyBGM from "./assets/musics/difficulty-bgm.mp3";
-import gameplayBGM from "./assets/musics/gameplay-bgm.mp3";
-import winBGM from "./assets/musics/win-bgm.mp3";
-import loseBGM from "./assets/musics/lose-bgm.mp3";
-import landingBGM from "./assets/musics/landing-bgm.mp3";
-
-// Mapping background music to states
-const bgms = {
-    99: landingBGM,
-    0: introBGM,
-    1: difficultyBGM,
-    2: gameplayBGM,
-    3: loseBGM,
-    4: winBGM,
-};
-
 function App() {
     const [state, setState] = useState(0);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [bgm, setBgm] = useState(landingBGM);
+    const [bgm, setBgm] = useState(null);
     const [isMusicPlaying, setIsMusicPlaying] = useState(false);
     const soundRef = useRef(null);
     const [hasMusicStarted, setHasMusicStarted] = useState(false);
@@ -79,7 +62,6 @@ function App() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setFirstLoad(false);
-            setBgm(landingBGM); // Set landing music
 
             if (!hasMusicStarted) {
                 setIsMusicPlaying(true); // Start music
