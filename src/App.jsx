@@ -37,12 +37,6 @@ function App() {
     const [hasMusicStarted, setHasMusicStarted] = useState(false);
     const [difficulty, setDifficulty] = useState("hard");
 
-    // Function to handle state transitions
-    const handleSetState = (val) => {
-        setState(val);
-        setBgm(bgms[val]);
-    };
-
     // Centralized music management logic
     const manageMusicPlayback = (bgmSource) => {
         if (soundRef.current) {
@@ -110,10 +104,7 @@ function App() {
                 </nav>
                 <main>
                     {state === 0 && (
-                        <Intro
-                            handleSetState={handleSetState}
-                            setBgm={setBgm}
-                        />
+                        <Intro setState={setState} setBgm={setBgm} />
                     )}
 
                     {state === 1 && (
@@ -127,7 +118,7 @@ function App() {
                     {state === 2 && (
                         <GamePlay
                             difficulty={difficulty}
-                            handleSetState={handleSetState}
+                            setState={setState}
                             setBgm={setBgm}
                         />
                     )}

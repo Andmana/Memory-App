@@ -6,7 +6,7 @@ import "../styles/intro.scss";
 
 import { useEffect, useState } from "react";
 
-const Intro = ({ handleSetState, setBgm }) => {
+const Intro = ({ setState, setBgm }) => {
     const [isLanding, setIsLanding] = useState(true);
     setBgm[landingBGM];
     useEffect(() => {
@@ -44,10 +44,7 @@ const Intro = ({ handleSetState, setBgm }) => {
             </div>
             <div className="intro-section">
                 <img src={memoryImg} alt="" />
-                <button
-                    className="btn gelatine"
-                    onClick={() => handleSetState(1)}
-                >
+                <button className="btn gelatine" onClick={() => setState(1)}>
                     START
                 </button>
             </div>
