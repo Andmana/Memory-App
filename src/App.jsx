@@ -135,12 +135,17 @@ function App() {
                     {state === 3 && !isGuideOpen && (
                         <Results
                             isWin={false}
-                            handleSetState={handleSetState}
+                            setState={setState}
+                            setBgm={setBgm}
                         />
                     )}
 
                     {state === 4 && !isGuideOpen && (
-                        <Results isWin={true} handleSetState={handleSetState} />
+                        <Results
+                            isWin={true}
+                            setState={setState}
+                            setBgm={setBgm}
+                        />
                     )}
                 </main>
                 <footer>
