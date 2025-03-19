@@ -54,8 +54,8 @@ function App() {
     // Play/Pause music when the `isMusicPlaying` state changes
     useEffect(() => {
         if (!soundRef.current) return;
-        if (isMusicPlaying) soundRef.current.play();
-        else soundRef.current.pause();
+        if (isMusicPlaying) soundRef.current.fade(0, 1, 1000);
+        else soundRef.current.fade(1, 0, 1000);
     }, [isMusicPlaying]);
 
     // Handle the initial music playback after the first load
