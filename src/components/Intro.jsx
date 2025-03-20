@@ -10,7 +10,7 @@ import { STATE } from "../App";
 const Intro = ({ setState, setBgm }) => {
     const [isLanding, setIsLanding] = useState(true);
     useEffect(() => {
-        setBgm[landingBGM];
+        setBgm(landingBGM);
         const timer = setTimeout(() => {
             setIsLanding(false);
             setBgm(introBGM);
