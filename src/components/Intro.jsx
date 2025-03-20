@@ -9,6 +9,12 @@ import { STATE } from "../App";
 
 const Intro = ({ handleSetState, setBgm }) => {
     const [isLanding, setIsLanding] = useState(true);
+
+    const handleLanding = () => {
+        setIsLanding(false);
+        setBgm(introBGM);
+    };
+
     useEffect(() => {
         setBgm(landingBGM);
         const timer = setTimeout(() => {
@@ -23,7 +29,7 @@ const Intro = ({ handleSetState, setBgm }) => {
         return (
             <div className="landing-container">
                 <div className="landing-header">
-                    <button className="btn" onClick={() => setIsLanding(false)}>
+                    <button className="btn" onClick={handleLanding}>
                         SKIP
                     </button>
                 </div>
