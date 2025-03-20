@@ -11,7 +11,7 @@ import GamePlay from "./components/GamePlay";
 import Results from "./components/Results";
 
 const STATE = {
-    LANDING: 0,
+    FIRST_LOAD: 0,
     INTRO: 1,
     DIFFICULTY: 2,
     GAMEPLAY: 3,
@@ -20,14 +20,15 @@ const STATE = {
 };
 
 function App() {
-    const [state, setState] = useState(STATE.INTRO);
+    const [state, setState] = useState(STATE.FIRST_LOAD);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [bgm, setBgm] = useState(null);
-    const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-    const soundRef = useRef(null);
-    const [hasMusicStarted, setHasMusicStarted] = useState(false);
     const [difficulty, setDifficulty] = useState("hard");
+
+    const [bgm, setBgm] = useState(null);
+    const [isMusicPlaying, setIsMusicPlaying] = useState(true);
+    const [hasMusicStarted, setHasMusicStarted] = useState(false);
+    const soundRef = useRef(null);
 
     const manageMusicPlayback = (bgmSource) => {
         if (!bgmSource) return;
@@ -69,20 +70,20 @@ function App() {
     }, [isMusicPlaying]);
 
     // Handle the initial music playback after the first load
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setFirstLoad(false);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setFirstLoad(false);
 
-            if (!hasMusicStarted) {
-                setIsMusicPlaying(true); // Start music
-                setHasMusicStarted(true); // Prevent restarting music
-            }
-        }, 3500);
+    //         if (!hasMusicStarted) {
+    //             setIsMusicPlaying(true); // Start music
+    //             setHasMusicStarted(true); // Prevent restarting music
+    //         }
+    //     }, 3500);
 
-        return () => clearTimeout(timer); // Cleanup timer on unmount
-    }, []);
+    //     return () => clearTimeout(timer); // Cleanup timer on unmount
+    // }, []);
 
-    if (isFirstLoad && state === STATE.INTRO) return <FirstLoad />;
+    if (state === STATE.FIRST_LOAD) return <FirstLoad setState={setState} />;
 
     return (
         <>

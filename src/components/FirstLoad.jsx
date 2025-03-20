@@ -1,10 +1,30 @@
-import load from "/loading.gif";
 import "../styles/first-load.scss";
-const FirstLoad = () => {
+
+import { useEffect, useState } from "react";
+import load from "/loading.gif";
+import { STATE } from "../App";
+
+const FirstLoad = ({ setState }) => {
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsFirstLoad(false);
+        }, 3500);
+
+        return () => clearTimeout(timer);
+    });
+
     return (
         <div className="first-load">
             <img className="loading-gif" src={load} alt="" />
-            <h1 className="loading">LOADING</h1>
+            {isFirstLoad ? (
+                <h2 className="loading">LOADING</h2>
+            ) : (
+                <button className="btn" onClick={() => setState(STATE.INTRO)}>
+                    CONTINUE
+                </button>
+            )}
+
             <div className="disclaimer-message">
                 <p>
                     This game is not associated with, endorsed by, or in any way
