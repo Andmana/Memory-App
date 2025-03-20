@@ -1,12 +1,11 @@
+import "../styles/intro.scss";
 import pokemonImg from "/pokemon.png";
 import memoryImg from "/memory-card.png";
-
 import landingBGM from "../assets/musics/landing-bgm.mp3";
 import introBGM from "../assets/musics/intro-bgm.mp3";
 
-import "../styles/intro.scss";
-
 import { useEffect, useState } from "react";
+import { STATE } from "../App";
 
 const Intro = ({ setState, setBgm }) => {
     const [isLanding, setIsLanding] = useState(true);
@@ -48,7 +47,10 @@ const Intro = ({ setState, setBgm }) => {
             </div>
             <div className="intro-section">
                 <img src={memoryImg} alt="" />
-                <button className="btn gelatine" onClick={() => setState(1)}>
+                <button
+                    className="btn gelatine"
+                    onClick={() => setState(STATE.DIFFICULTY)}
+                >
                     START
                 </button>
             </div>

@@ -1,13 +1,14 @@
 import pokemonImg from "/pokemon.png";
 import memoryImg from "/memory-card.png";
+import difficultyBGM from "../assets/musics/difficulty-bgm.mp3";
 import "../styles/difficulty.scss";
 
-import difficultyBGM from "../assets/musics/difficulty-bgm.mp3";
 import { useEffect } from "react";
+import { STATE } from "../App";
 
 const Difficulty = ({ setState, setDifficulty, setBgm }) => {
     const handleDifficulty = (diffulcty) => {
-        setState(2);
+        setState(STATE.GAMEPLAY);
         setDifficulty(diffulcty);
     };
 

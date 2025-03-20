@@ -1,7 +1,9 @@
-import { useEffect } from "react";
 import "../styles/results.scss";
 import winBGM from "../assets/musics/win-bgm.mp3";
 import loseBGM from "../assets/musics/lose-bgm.mp3";
+
+import { useEffect } from "react";
+import { STATE } from "../App";
 
 const Results = ({ isWin, setState, setBgm }) => {
     const bgm = isWin ? winBGM : loseBGM;
@@ -18,10 +20,16 @@ const Results = ({ isWin, setState, setBgm }) => {
                     {isWin ? "YOU WIN" : "YOU LOST"}
                 </div>
                 <div className="results-actions">
-                    <button className="btn" onClick={() => setState(2)}>
+                    <button
+                        className="btn"
+                        onClick={() => setState(STATE.GAMEPLAY)}
+                    >
                         RETRY
                     </button>
-                    <button className="btn" onClick={() => setState(1)}>
+                    <button
+                        className="btn"
+                        onClick={() => setState(STATE.DIFFICULTY)}
+                    >
                         CHANGE <br></br> DIFFICULTY
                     </button>
                 </div>

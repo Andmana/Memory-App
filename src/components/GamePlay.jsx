@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
-import Loading from "./Loading";
 import "../styles/gameplay.scss";
-import Cards from "./Cards";
 import gameplayBGM from "../assets/musics/gameplay-bgm.mp3";
+
+import { useEffect, useState } from "react";
+import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
+import { STATE } from "../App";
+import Loading from "./Loading";
+import Cards from "./Cards";
 
 // Difficulty configuration
 const DIFFICULTIES = {
@@ -41,9 +43,9 @@ const GamePlay = ({ difficulty, setState, setBgm }) => {
         const cardId = parseInt(target.dataset.id);
 
         if (pickedIds.includes(cardId)) {
-            setState(3); // Game over
+            setState(STATE.LOSE); // Game over
         } else if (pickedIds.length + 1 === numberOfCards) {
-            setState(4); // Game over
+            setState(STATE.WIN); // Game over
         } else {
             setPickedIds([...pickedIds, cardId]); // Update picked card IDs
 
@@ -90,7 +92,10 @@ const GamePlay = ({ difficulty, setState, setBgm }) => {
                 className={`gameplay-header bg-${difficultyName.toLowerCase()}`}
             >
                 <div>
-                    <button className="btn" onClick={() => setState(1)}>
+                    <button
+                        className="btn"
+                        onClick={() => setState(STATE.DIFFICULTY)}
+                    >
                         BACK
                     </button>
                 </div>

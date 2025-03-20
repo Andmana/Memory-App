@@ -10,8 +10,17 @@ import Difficulty from "./components/Difficulty";
 import GamePlay from "./components/GamePlay";
 import Results from "./components/Results";
 
+const STATE = {
+    LANDING: 0,
+    INTRO: 1,
+    DIFFICULTY: 2,
+    GAMEPLAY: 3,
+    WIN: 4,
+    LOSE: 5,
+};
+
 function App() {
-    const [state, setState] = useState(0);
+    const [state, setState] = useState(STATE.INTRO);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
     const [bgm, setBgm] = useState(null);
@@ -20,8 +29,9 @@ function App() {
     const [hasMusicStarted, setHasMusicStarted] = useState(false);
     const [difficulty, setDifficulty] = useState("hard");
 
-    // Centralized music management logic
     const manageMusicPlayback = (bgmSource) => {
+        if (!bgmSource) return;
+
         if (soundRef.current) {
             soundRef.current.stop();
             soundRef.current.unload();
@@ -72,7 +82,7 @@ function App() {
         return () => clearTimeout(timer); // Cleanup timer on unmount
     }, []);
 
-    if (isFirstLoad && state === 0) return <FirstLoad />;
+    if (isFirstLoad && state === STATE.INTRO) return <FirstLoad />;
 
     return (
         <>
@@ -85,11 +95,11 @@ function App() {
                     />
                 </nav>
                 <main>
-                    {state === 0 && (
+                    {state === STATE.INTRO && (
                         <Intro setState={setState} setBgm={setBgm} />
                     )}
 
-                    {state === 1 && (
+                    {state === STATE.DIFFICULTY && (
                         <Difficulty
                             setState={setState}
                             setDifficulty={setDifficulty}
@@ -97,7 +107,7 @@ function App() {
                         />
                     )}
 
-                    {state === 2 && (
+                    {state === STATE.GAMEPLAY && (
                         <GamePlay
                             difficulty={difficulty}
                             setState={setState}
@@ -105,7 +115,7 @@ function App() {
                         />
                     )}
 
-                    {state === 3 && !isGuideOpen && (
+                    {state === STATE.LOSE && !isGuideOpen && (
                         <Results
                             isWin={false}
                             setState={setState}
@@ -113,7 +123,7 @@ function App() {
                         />
                     )}
 
-                    {state === 4 && !isGuideOpen && (
+                    {state === STATE.WIN && !isGuideOpen && (
                         <Results
                             isWin={true}
                             setState={setState}
@@ -132,4 +142,5 @@ function App() {
     );
 }
 
+export { STATE };
 export default App;
