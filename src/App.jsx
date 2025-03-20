@@ -27,8 +27,11 @@ function App() {
 
     const [bgm, setBgm] = useState(null);
     const [isMusicPlaying, setIsMusicPlaying] = useState(true);
-    const [hasMusicStarted, setHasMusicStarted] = useState(false);
     const soundRef = useRef(null);
+
+    const handleSetState = (_state) => {
+        setState(_state);
+    };
 
     const manageMusicPlayback = (bgmSource) => {
         if (!bgmSource) return;
@@ -69,21 +72,8 @@ function App() {
         else soundRef.current.fade(1, 0, 1000);
     }, [isMusicPlaying]);
 
-    // Handle the initial music playback after the first load
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setFirstLoad(false);
-
-    //         if (!hasMusicStarted) {
-    //             setIsMusicPlaying(true); // Start music
-    //             setHasMusicStarted(true); // Prevent restarting music
-    //         }
-    //     }, 3500);
-
-    //     return () => clearTimeout(timer); // Cleanup timer on unmount
-    // }, []);
-
-    if (state === STATE.FIRST_LOAD) return <FirstLoad setState={setState} />;
+    if (state === STATE.FIRST_LOAD)
+        return <FirstLoad handleSetState={handleSetState} />;
 
     return (
         <>
@@ -97,12 +87,15 @@ function App() {
                 </nav>
                 <main>
                     {state === STATE.INTRO && (
-                        <Intro setState={setState} setBgm={setBgm} />
+                        <Intro
+                            handleSetState={handleSetState}
+                            setBgm={setBgm}
+                        />
                     )}
 
                     {state === STATE.DIFFICULTY && (
                         <Difficulty
-                            setState={setState}
+                            handleSetState={handleSetState}
                             setDifficulty={setDifficulty}
                             setBgm={setBgm}
                         />
@@ -111,7 +104,7 @@ function App() {
                     {state === STATE.GAMEPLAY && (
                         <GamePlay
                             difficulty={difficulty}
-                            setState={setState}
+                            handleSetState={handleSetState}
                             setBgm={setBgm}
                         />
                     )}
@@ -119,7 +112,7 @@ function App() {
                     {state === STATE.LOSE && !isGuideOpen && (
                         <Results
                             isWin={false}
-                            setState={setState}
+                            handleSetState={handleSetState}
                             setBgm={setBgm}
                         />
                     )}
@@ -127,7 +120,7 @@ function App() {
                     {state === STATE.WIN && !isGuideOpen && (
                         <Results
                             isWin={true}
-                            setState={setState}
+                            handleSetState={handleSetState}
                             setBgm={setBgm}
                         />
                     )}

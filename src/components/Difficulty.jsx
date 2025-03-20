@@ -6,9 +6,9 @@ import "../styles/difficulty.scss";
 import { useEffect } from "react";
 import { STATE } from "../App";
 
-const Difficulty = ({ setState, setDifficulty, setBgm }) => {
+const Difficulty = ({ handleSetState, setDifficulty, setBgm }) => {
     const handleDifficulty = (diffulcty) => {
-        setState(STATE.GAMEPLAY);
+        handleSetState(STATE.GAMEPLAY);
         setDifficulty(diffulcty);
     };
 

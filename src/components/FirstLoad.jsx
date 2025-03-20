@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import load from "/loading.gif";
 import { STATE } from "../App";
 
-const FirstLoad = ({ setState }) => {
+const FirstLoad = ({ handleSetState }) => {
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -20,7 +20,10 @@ const FirstLoad = ({ setState }) => {
             {isFirstLoad ? (
                 <h2 className="loading">LOADING</h2>
             ) : (
-                <button className="btn" onClick={() => setState(STATE.INTRO)}>
+                <button
+                    className="btn"
+                    onClick={() => handleSetState(STATE.INTRO)}
+                >
                     CONTINUE
                 </button>
             )}

@@ -26,7 +26,7 @@ const DIFFICULTIES = {
     },
 };
 
-const GamePlay = ({ difficulty, setState, setBgm }) => {
+const GamePlay = ({ difficulty, handleSetState, setBgm }) => {
     const { cards: numberOfCards, pokemon: difficultyName } =
         DIFFICULTIES[difficulty];
 
@@ -43,9 +43,9 @@ const GamePlay = ({ difficulty, setState, setBgm }) => {
         const cardId = parseInt(target.dataset.id);
 
         if (pickedIds.includes(cardId)) {
-            setState(STATE.LOSE); // Game over
+            handleSetState(STATE.LOSE); // Game over
         } else if (pickedIds.length + 1 === numberOfCards) {
-            setState(STATE.WIN); // Game over
+            handleSetState(STATE.WIN); // Game over
         } else {
             setPickedIds([...pickedIds, cardId]); // Update picked card IDs
 
@@ -94,7 +94,7 @@ const GamePlay = ({ difficulty, setState, setBgm }) => {
                 <div>
                     <button
                         className="btn"
-                        onClick={() => setState(STATE.DIFFICULTY)}
+                        onClick={() => handleSetState(STATE.DIFFICULTY)}
                     >
                         BACK
                     </button>

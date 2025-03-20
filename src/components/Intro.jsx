@@ -7,7 +7,7 @@ import introBGM from "../assets/musics/intro-bgm.mp3";
 import { useEffect, useState } from "react";
 import { STATE } from "../App";
 
-const Intro = ({ setState, setBgm }) => {
+const Intro = ({ handleSetState, setBgm }) => {
     const [isLanding, setIsLanding] = useState(true);
     useEffect(() => {
         setBgm(landingBGM);
@@ -49,7 +49,7 @@ const Intro = ({ setState, setBgm }) => {
                 <img src={memoryImg} alt="" />
                 <button
                     className="btn gelatine"
-                    onClick={() => setState(STATE.DIFFICULTY)}
+                    onClick={() => handleSetState(STATE.DIFFICULTY)}
                 >
                     START
                 </button>

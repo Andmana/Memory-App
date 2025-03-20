@@ -5,7 +5,7 @@ import loseBGM from "../assets/musics/lose-bgm.mp3";
 import { useEffect } from "react";
 import { STATE } from "../App";
 
-const Results = ({ isWin, setState, setBgm }) => {
+const Results = ({ isWin, handleSetState, setBgm }) => {
     const bgm = isWin ? winBGM : loseBGM;
     useEffect(() => setBgm(bgm), []);
 
@@ -22,13 +22,13 @@ const Results = ({ isWin, setState, setBgm }) => {
                 <div className="results-actions">
                     <button
                         className="btn"
-                        onClick={() => setState(STATE.GAMEPLAY)}
+                        onClick={() => handleSetState(STATE.GAMEPLAY)}
                     >
                         RETRY
                     </button>
                     <button
                         className="btn"
-                        onClick={() => setState(STATE.DIFFICULTY)}
+                        onClick={() => handleSetState(STATE.DIFFICULTY)}
                     >
                         CHANGE <br></br> DIFFICULTY
                     </button>
