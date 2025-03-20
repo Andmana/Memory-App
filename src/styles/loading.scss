@@ -15,12 +15,9 @@
 
     position: absolute;
     left: 0;
-
     top: 50%;
-    transform: translateY(-50%);
 
-    transition: transform 0.4s ease-in, opacity 0.4s ease-in,
-        visibility 0s linear 0.4s;
+    animation: showing-up 0.2s linear forwards;
 
     .loading-detail {
         flex-basis: 320px;
@@ -69,5 +66,14 @@
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@keyframes showing-up {
+    0% {
+        transform: translateY(-50%) scaleY(0);
+    }
+    100% {
+        transform: translateY(-50%) scaleY(1);
     }
 }

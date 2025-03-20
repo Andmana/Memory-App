@@ -23,7 +23,7 @@ function App() {
     const [state, setState] = useState(STATE.FIRST_LOAD);
     const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
-    const [difficulty, setDifficulty] = useState("hard");
+    const [difficulty, setDifficulty] = useState("HARD");
 
     const [bgm, setBgm] = useState(null);
     const [isMusicPlaying, setIsMusicPlaying] = useState(true);
