@@ -1,7 +1,7 @@
 import "../styles/gameplay.scss";
 import gameplayBGM from "../assets/musics/gameplay-bgm.mp3";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import { STATE } from "../App";
 import Loading from "./Loading";
@@ -50,46 +50,50 @@ const GamePlay = ({
     const [pickedIds, setPickedIds] = useState([]);
 
     // Handle card selection
-    const handlePickedCard = ({ target }) => {
-        const cardId = parseInt(target.dataset.id);
+    const handlePickedCard = useCallback(
+        ({ target }) => {
+            const cardId = parseInt(target.dataset.id);
 
-        // Flip card face-up
-        setIsCardFlipped(true);
+            // Check if the card has already been picked
+            if (pickedIds.includes(cardId)) {
+                handleSetState(STATE.LOSE); // Game over
+                return; // Exit early
+            }
 
-        // Play sound effects if music is playing
-        if (isMusicPlaying) flipSfx.play();
+            setScore((prevState) => prevState + 1); // Update score
 
-        // Check if the card has already been picked
-        if (pickedIds.includes(cardId)) {
-            handleSetState(STATE.LOSE); // Game over
-            return; // Exit early
-        }
+            // Check for win condition
+            if (pickedIds.length + 1 === numberOfCards) {
+                handleSetState(STATE.WIN); // Game over
+                return; // Exit early
+            }
 
-        setScore((prevState) => prevState + 1); // Update score
+            setPickedIds((prevPickedIds) => [...prevPickedIds, cardId]); // Update picked card IDs
 
-        // Check for win condition
-        if (pickedIds.length + 1 === numberOfCards) {
-            handleSetState(STATE.WIN); // Game over
-            return; // Exit early
-        }
+            // Flip card face-up
+            setIsCardFlipped(true);
 
-        setPickedIds([...pickedIds, cardId]); // Update picked card IDs
-        // Shuffle Pokémon list after a delay
-        setTimeout(() => {
-            setPokemonList(shufflePokemons([...pokemonList]));
+            // Play sound effects if music is playing
+            if (isMusicPlaying) flipSfx.play();
 
-            // Flip cards back face-down after a delay
+            // Shuffle Pokémon list after a delay, then flip cards back face-down
             setTimeout(() => {
-                if (isMusicPlaying) flipSfx.play();
-                setIsCardFlipped(false);
-            }, 1000);
-        }, 500);
-    };
-
-    // First Mount
-    useEffect(() => {
-        setBgm(gameplayBGM), setScore(0);
-    }, []);
+                setPokemonList(shufflePokemons([...pokemonList]));
+                setTimeout(() => {
+                    if (isMusicPlaying) flipSfx.play();
+                    setIsCardFlipped(false);
+                }, 1000);
+            }, 500);
+        },
+        [
+            pokemonList,
+            pickedIds,
+            numberOfCards,
+            handleSetState,
+            isMusicPlaying,
+            setScore,
+        ]
+    );
 
     // Fetch Pokémon data on component mount
     useEffect(() => {
@@ -107,6 +111,12 @@ const GamePlay = ({
         };
         fetchData();
     }, [numberOfCards]);
+
+    // Set background music and score on first mount
+    useEffect(() => {
+        setBgm(gameplayBGM);
+        setScore(0);
+    }, [setBgm, setScore]);
 
     // Show loading spinner while data is being fetched
     if (isLoading) return <Loading difficulty={DIFFICULTIES[difficulty]} />;

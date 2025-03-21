@@ -1,7 +1,7 @@
+import "../styles/difficulty.scss";
 import pokemonImg from "/pokemon.png";
 import memoryImg from "/memory-card.png";
 import difficultyBGM from "../assets/musics/difficulty-bgm.mp3";
-import "../styles/difficulty.scss";
 
 import { useEffect } from "react";
 import { STATE } from "../App";
