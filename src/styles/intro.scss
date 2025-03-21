@@ -36,6 +36,12 @@
     .landing-header {
         @include flexCenter;
         justify-content: end;
+
+        button {
+            @include fontStyle(white, transparent);
+            position: absolute;
+            top: 0.6rem;
+        }
     }
 
     .landing-content {
