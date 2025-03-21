@@ -6,6 +6,7 @@ import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import { STATE } from "../App";
 import Loading from "./Loading";
 import Cards from "./Cards";
+import { flipSfx, pickSfx } from "../utils/Sfx";
 
 // Difficulty configuration
 const DIFFICULTIES = {
@@ -26,7 +27,7 @@ const DIFFICULTIES = {
     },
 };
 
-const GamePlay = ({ difficulty, handleSetState, setBgm }) => {
+const GamePlay = ({ difficulty, handleSetState, setBgm, isMusicPlaying }) => {
     const { cards: numberOfCards, pokemon: difficultyName } =
         DIFFICULTIES[difficulty];
 
@@ -39,6 +40,10 @@ const GamePlay = ({ difficulty, handleSetState, setBgm }) => {
     // Handle card selection
     const handlePickedCard = ({ target }) => {
         setIsCardFlipped(true); // Flip cards face-up
+        if (isMusicPlaying) {
+            pickSfx.play();
+            flipSfx.play();
+        }
 
         const cardId = parseInt(target.dataset.id);
 
@@ -56,11 +61,11 @@ const GamePlay = ({ difficulty, handleSetState, setBgm }) => {
 
             // Flip cards back face-down after a delay
             setTimeout(() => {
+                if (isMusicPlaying) flipSfx.play();
                 setIsCardFlipped(false);
             }, 1500);
         }
     };
-    console.log("pickedIds", pickedIds);
 
     // First Mount
     useEffect(() => setBgm(gameplayBGM), []);

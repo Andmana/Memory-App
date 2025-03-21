@@ -108,6 +108,7 @@ function App() {
                             difficulty={difficulty}
                             handleSetState={handleSetState}
                             setBgm={setBgm}
+                            isMusicPlaying={isMusicPlaying}
                         />
                     )}
 
