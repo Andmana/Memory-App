@@ -1,4 +1,5 @@
 import "../styles/nav.scss";
+import { buttonSfx } from "../utils/Sfx";
 
 const Nav = ({ setIsGuideOpen, setIsMusicPlaying, isMusicPlaying }) => {
     return (
@@ -7,11 +8,17 @@ const Nav = ({ setIsGuideOpen, setIsMusicPlaying, isMusicPlaying }) => {
                 className={`
                     btn icon icon-music${isMusicPlaying ? "__on" : "__off"}
                 `}
-                onClick={() => setIsMusicPlaying((prevState) => !prevState)}
+                onClick={() => {
+                    setIsMusicPlaying((prevState) => !prevState);
+                    if (!isMusicPlaying) buttonSfx.play();
+                }}
             ></button>
             <button
                 className="btn icon icon-help"
-                onClick={() => setIsGuideOpen((prevState) => !prevState)}
+                onClick={() => {
+                    setIsGuideOpen((prevState) => !prevState);
+                    if (isMusicPlaying) buttonSfx.play();
+                }}
             ></button>
         </div>
     );
