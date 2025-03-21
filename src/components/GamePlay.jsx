@@ -6,7 +6,7 @@ import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
 import { STATE } from "../App";
 import Loading from "./Loading";
 import Cards from "./Cards";
-import { flipSfx, pickSfx } from "../utils/Sfx";
+import { flipSfx } from "../utils/Sfx";
 
 // Difficulty configuration
 const DIFFICULTIES = {
@@ -39,32 +39,38 @@ const GamePlay = ({ difficulty, handleSetState, setBgm, isMusicPlaying }) => {
 
     // Handle card selection
     const handlePickedCard = ({ target }) => {
-        setIsCardFlipped(true); // Flip cards face-up
-        if (isMusicPlaying) {
-            pickSfx.play();
-            flipSfx.play();
-        }
-
         const cardId = parseInt(target.dataset.id);
 
+        // Flip card face-up
+        setIsCardFlipped(true);
+
+        // Play sound effects if music is playing
+        if (isMusicPlaying) flipSfx.play();
+
+        // Check if the card has already been picked
         if (pickedIds.includes(cardId)) {
             handleSetState(STATE.LOSE); // Game over
-        } else if (pickedIds.length + 1 === numberOfCards) {
-            handleSetState(STATE.WIN); // Game over
-        } else {
-            setPickedIds([...pickedIds, cardId]); // Update picked card IDs
+            return; // Exit early
+        }
 
-            // Shuffle Pokémon list after a delay
-            setTimeout(() => {
-                setPokemonList(shufflePokemons([...pokemonList]));
-            }, 500);
+        // Check for win condition
+        if (pickedIds.length + 1 === numberOfCards) {
+            handleSetState(STATE.WIN); // Game over
+            return; // Exit early
+        }
+
+        setPickedIds([...pickedIds, cardId]); // Update picked card IDs
+
+        // Shuffle Pokémon list after a delay
+        setTimeout(() => {
+            setPokemonList(shufflePokemons([...pokemonList]));
 
             // Flip cards back face-down after a delay
             setTimeout(() => {
                 if (isMusicPlaying) flipSfx.play();
                 setIsCardFlipped(false);
-            }, 1500);
-        }
+            }, 1000);
+        }, 500);
     };
 
     // First Mount

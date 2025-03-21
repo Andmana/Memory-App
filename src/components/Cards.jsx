@@ -1,4 +1,3 @@
-import { shufflePokemons } from "../utils/Pokemon";
 import Card from "./Card";
 
 const Cards = ({ pokemonList, isCardFlipped, handlePickedCard }) => {
