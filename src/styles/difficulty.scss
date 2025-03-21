@@ -29,7 +29,9 @@
 
         .difficulty-buttons {
             @include flexCenter();
-            gap: 2em;
+            flex-wrap: wrap;
+            gap: 1em;
+            max-width: 600px;
         }
         animation: zoom-in 1s ease-out forwards;
     }

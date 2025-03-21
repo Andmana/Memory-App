@@ -17,11 +17,17 @@ const DIFFICULTIES = {
     },
     MEDIUM: {
         name: "MEDIUM",
-        pokemon: "CHARIZARD",
+        pokemon: "PIKACHU",
         cards: 8,
     },
     HARD: {
         name: "HARD",
+        cards: 12,
+        pokemon: "CHARIZARD",
+    },
+
+    ENDLESS: {
+        name: "ENDLESS",
         cards: 12,
         pokemon: "ARCEUS",
     },

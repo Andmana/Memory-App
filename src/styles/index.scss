@@ -95,6 +95,11 @@ a {
     @include bgImage;
 }
 
+.bg-pikachu {
+    background-image: url("/pikachu.png");
+    @include bgImage;
+}
+
 .btn {
     @include fontStyle($color-theme-2, white);
     transition: transform 0.2s ease-out;

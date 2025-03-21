@@ -41,6 +41,12 @@ const Difficulty = ({ handleSetState, setDifficulty, setBgm }) => {
                     >
                         HARD
                     </button>
+                    <button
+                        onClick={() => handleDifficulty("ENDLESS")}
+                        className="btn"
+                    >
+                        ENDLESS
+                    </button>
                 </div>
             </section>
         </div>
