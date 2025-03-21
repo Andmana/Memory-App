@@ -6,8 +6,9 @@ import introBGM from "../assets/musics/intro-bgm.mp3";
 
 import { useEffect, useState } from "react";
 import { STATE } from "../App";
+import { buttonSfx } from "../utils/Sfx";
 
-const Intro = ({ handleSetState, setBgm }) => {
+const Intro = ({ handleSetState, setBgm, isMusicPlaying }) => {
     const [isLanding, setIsLanding] = useState(true);
 
     const handleLanding = () => {
@@ -29,7 +30,13 @@ const Intro = ({ handleSetState, setBgm }) => {
         return (
             <div className="landing-container">
                 <div className="landing-header">
-                    <button className="btn" onClick={handleLanding}>
+                    <button
+                        className="btn"
+                        onClick={() => {
+                            handleLanding();
+                            if (isMusicPlaying) buttonSfx.play();
+                        }}
+                    >
                         SKIP
                     </button>
                 </div>

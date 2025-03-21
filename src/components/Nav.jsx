@@ -5,6 +5,7 @@ const Nav = ({ setIsGuideOpen, setIsMusicPlaying, isMusicPlaying }) => {
     return (
         <div className="nav-container">
             <button
+                aria-label={isMusicPlaying ? "Mute sound" : "Unmute sound"}
                 className={`
                     btn icon icon-music${isMusicPlaying ? "__on" : "__off"}
                 `}
@@ -14,6 +15,7 @@ const Nav = ({ setIsGuideOpen, setIsMusicPlaying, isMusicPlaying }) => {
                 }}
             ></button>
             <button
+                aria-label="Show Guide"
                 className="btn icon icon-help"
                 onClick={() => {
                     setIsGuideOpen((prevState) => !prevState);

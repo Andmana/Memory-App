@@ -9,6 +9,7 @@ import Intro from "./components/Intro";
 import Difficulty from "./components/Difficulty";
 import GamePlay from "./components/GamePlay";
 import Results from "./components/Results";
+import { buttonSfx } from "./utils/Sfx";
 
 const STATE = {
     FIRST_LOAD: 0,
@@ -21,7 +22,6 @@ const STATE = {
 
 function App() {
     const [state, setState] = useState(STATE.FIRST_LOAD);
-    const [isFirstLoad, setFirstLoad] = useState(true);
     const [isGuideOpen, setIsGuideOpen] = useState(false);
     const [difficulty, setDifficulty] = useState("HARD");
 
@@ -31,6 +31,7 @@ function App() {
 
     const handleSetState = (_state) => {
         setState(_state);
+        if (isMusicPlaying) buttonSfx.play();
     };
 
     const manageMusicPlayback = (bgmSource) => {
@@ -90,6 +91,7 @@ function App() {
                         <Intro
                             handleSetState={handleSetState}
                             setBgm={setBgm}
+                            isMusicPlaying={isMusicPlaying}
                         />
                     )}
 
