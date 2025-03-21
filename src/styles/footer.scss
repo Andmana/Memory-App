@@ -2,10 +2,10 @@
 
 .footer-container {
     @include flexCenter;
-    animation: float-up 1s ease-out forwards;
+    animation: footer-float-up 1s ease-out forwards;
 }
 
-@keyframes float-up {
+@keyframes footer-float-up {
     0% {
         transform: translateY(100%);
     }
