@@ -25,6 +25,9 @@ function App() {
     const [isGuideOpen, setIsGuideOpen] = useState(false);
     const [difficulty, setDifficulty] = useState("HARD");
 
+    const [score, setScore] = useState(0);
+    const [highScore, sethighScore] = useState(0);
+
     const [bgm, setBgm] = useState(null);
     const [isMusicPlaying, setIsMusicPlaying] = useState(true);
     const soundRef = useRef(null);
@@ -73,6 +76,11 @@ function App() {
         else soundRef.current.fade(1, 0, 1000);
     }, [isMusicPlaying]);
 
+    // Update highScore
+    useEffect(() => {
+        if (score > highScore) sethighScore(score);
+    }, [score]);
+
     if (state === STATE.FIRST_LOAD)
         return <FirstLoad handleSetState={handleSetState} />;
 
@@ -84,6 +92,9 @@ function App() {
                         setIsGuideOpen={setIsGuideOpen}
                         setIsMusicPlaying={setIsMusicPlaying}
                         isMusicPlaying={isMusicPlaying}
+                        score={score}
+                        highScore={highScore}
+                        showScore={state === STATE.GAMEPLAY ? true : false}
                     />
                 </nav>
                 <main>
@@ -109,6 +120,7 @@ function App() {
                             handleSetState={handleSetState}
                             setBgm={setBgm}
                             isMusicPlaying={isMusicPlaying}
+                            setScore={setScore}
                         />
                     )}
 

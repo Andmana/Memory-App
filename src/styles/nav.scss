@@ -2,8 +2,13 @@
 
 .nav-container {
     @include flexCenter;
-    justify-content: start;
+    justify-content: space-between;
     animation: float-down 1s ease-out forwards;
+
+    .score-board {
+        @include fontStyle(white, transparent);
+        text-align: end;
+    }
 }
 
 @keyframes float-down {

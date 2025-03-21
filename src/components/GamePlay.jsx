@@ -27,7 +27,13 @@ const DIFFICULTIES = {
     },
 };
 
-const GamePlay = ({ difficulty, handleSetState, setBgm, isMusicPlaying }) => {
+const GamePlay = ({
+    difficulty,
+    handleSetState,
+    setBgm,
+    isMusicPlaying,
+    setScore,
+}) => {
     const { cards: numberOfCards, pokemon: difficultyName } =
         DIFFICULTIES[difficulty];
 
@@ -53,6 +59,8 @@ const GamePlay = ({ difficulty, handleSetState, setBgm, isMusicPlaying }) => {
             return; // Exit early
         }
 
+        setScore((prevState) => prevState + 1); // Update score
+
         // Check for win condition
         if (pickedIds.length + 1 === numberOfCards) {
             handleSetState(STATE.WIN); // Game over
@@ -60,7 +68,6 @@ const GamePlay = ({ difficulty, handleSetState, setBgm, isMusicPlaying }) => {
         }
 
         setPickedIds([...pickedIds, cardId]); // Update picked card IDs
-
         // Shuffle Pokémon list after a delay
         setTimeout(() => {
             setPokemonList(shufflePokemons([...pokemonList]));
@@ -74,7 +81,9 @@ const GamePlay = ({ difficulty, handleSetState, setBgm, isMusicPlaying }) => {
     };
 
     // First Mount
-    useEffect(() => setBgm(gameplayBGM), []);
+    useEffect(() => {
+        setBgm(gameplayBGM), setScore(0);
+    }, []);
 
     // Fetch Pokémon data on component mount
     useEffect(() => {
