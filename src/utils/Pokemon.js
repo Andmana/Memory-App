@@ -41,7 +41,7 @@ const fetchRandomPokemon = async (count) => {
 };
 
 const regeneratePokemonList = async (_pokemonList, uniquePokemonIds) => {
-    const pokemonList = [..._pokemonList.slice(0, 8)];
+    const pokemonList = [..._pokemonList.slice(0, 4)];
 
     while (pokemonList.length < 12) {
         const id = Math.floor(Math.random() * 1025) + 1;

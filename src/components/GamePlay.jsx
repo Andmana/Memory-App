@@ -2,7 +2,11 @@ import "../styles/gameplay.scss";
 import gameplayBGM from "../assets/musics/gameplay-bgm.mp3";
 
 import { useCallback, useEffect, useState } from "react";
-import { fetchRandomPokemon, shufflePokemons } from "../utils/Pokemon";
+import {
+    fetchRandomPokemon,
+    regeneratePokemonList,
+    shufflePokemons,
+} from "../utils/Pokemon";
 import { STATE } from "../App";
 import Loading from "./Loading";
 import Cards from "./Cards";
@@ -51,7 +55,7 @@ const GamePlay = ({
 
     // Handle card selection
     const handlePickedCard = useCallback(
-        ({ target }) => {
+        async ({ target }) => {
             const cardId = parseInt(target.dataset.id);
 
             // Check if the card has already been picked
@@ -62,12 +66,6 @@ const GamePlay = ({
 
             setScore((prevState) => prevState + 1); // Update score
 
-            // Check for win condition
-            if (pickedIds.length + 1 === numberOfCards) {
-                handleSetState(STATE.WIN); // Game over
-                return; // Exit early
-            }
-
             setPickedIds((prevPickedIds) => [...prevPickedIds, cardId]); // Update picked card IDs
 
             // Flip card face-up
@@ -76,13 +74,41 @@ const GamePlay = ({
             // Play sound effects if music is playing
             if (isMusicPlaying) flipSfx.play();
 
+            if (difficulty !== "ENDLESS") {
+                // Check for win condition
+                if (pickedIds.length + 1 === numberOfCards) {
+                    handleSetState(STATE.WIN); // Game over
+                    return; // Exit early
+                }
+            } else {
+                // Check for win condition
+                if (pickedIds.length + 1 === 1000) {
+                    handleSetState(STATE.WIN); // Game over
+                    return; // Exit early
+                }
+
+                const cardsIntersect = pokemonList.filter((item) =>
+                    pickedIds.includes(item.id)
+                );
+
+                // Regenerate card if 10 of current picked card already picked
+                if (cardsIntersect.length >= 9) {
+                    console.log("goes here");
+                    const newPokemonList = await regeneratePokemonList(
+                        pokemonList,
+                        pickedIds
+                    );
+                    setPokemonList(newPokemonList);
+                }
+            }
+
             // Shuffle Pokémon list after a delay, then flip cards back face-down
             setTimeout(() => {
-                setPokemonList(shufflePokemons([...pokemonList]));
+                setPokemonList((prevList) => shufflePokemons([...prevList]));
                 setTimeout(() => {
                     if (isMusicPlaying) flipSfx.play();
                     setIsCardFlipped(false);
-                }, 1000);
+                }, 500);
             }, 500);
         },
         [
@@ -92,6 +118,7 @@ const GamePlay = ({
             handleSetState,
             isMusicPlaying,
             setScore,
+            difficulty,
         ]
     );
 
@@ -141,7 +168,8 @@ const GamePlay = ({
                         {difficulty.toString().toUpperCase()}
                     </div>
                     <div className="game-score">
-                        {pickedIds.length}/{numberOfCards}
+                        {pickedIds.length}/
+                        {difficulty === "ENDLESS" ? "1000" : numberOfCards}
                     </div>
                 </div>
                 <div className="mascot">{difficultyName.toUpperCase()}</div>
