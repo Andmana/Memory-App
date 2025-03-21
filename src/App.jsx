@@ -133,7 +133,10 @@ function App() {
                 </footer>
             </div>
             <dialog className={isGuideOpen ? "show" : ""}>
-                <Guidance setIsGuideOpen={setIsGuideOpen} />
+                <Guidance
+                    setIsGuideOpen={setIsGuideOpen}
+                    isMusicPlaying={isMusicPlaying}
+                />
             </dialog>
         </>
     );

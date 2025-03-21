@@ -1,6 +1,7 @@
 import "../styles/guidance.scss";
+import { buttonSfx } from "../utils/Sfx";
 
-const Guidance = ({ setIsGuideOpen }) => {
+const Guidance = ({ setIsGuideOpen, isMusicPlaying }) => {
     return (
         <div className="guidance-container">
             <div>
@@ -9,8 +10,12 @@ const Guidance = ({ setIsGuideOpen }) => {
             </div>
             <div className="dialog-close">
                 <button
+                    aria-label="Close guide"
                     className="icon icon-close"
-                    onClick={() => setIsGuideOpen((prevState) => !prevState)}
+                    onClick={() => {
+                        if (isMusicPlaying) buttonSfx.play();
+                        setIsGuideOpen((prevState) => !prevState);
+                    }}
                 ></button>
             </div>
         </div>
