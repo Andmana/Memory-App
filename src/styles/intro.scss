@@ -21,7 +21,7 @@
         }
 
         .gelatine {
-            animation: gelatine 0.7s infinite 0.4s;
+            animation: $gelatine;
             font-size: 2rem;
         }
     }
@@ -89,21 +89,5 @@
     100% {
         opacity: 1;
         transform: scale(1);
-    }
-}
-
-@keyframes gelatine {
-    from,
-    to {
-        transform: scale(1, 1);
-    }
-    25% {
-        transform: scale(0.9, 1.1);
-    }
-    50% {
-        transform: scale(1.1, 0.9);
-    }
-    75% {
-        transform: scale(0.95, 1.05);
     }
 }

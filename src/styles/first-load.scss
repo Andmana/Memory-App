@@ -6,6 +6,10 @@
 
     min-height: 100vh;
 
+    button {
+        animation: $gelatine;
+    }
+
     .loading-gif {
         transform: rotateY(180deg);
         animation: walk 3.5s ease-in forwards;
